@@ -50,10 +50,12 @@ During development we want to build whenever our code changes, in both the clien
 This middleware makes that insanely easy:
 
 - Automatically looks for code changes and automatically compiles by using watch() from `webpack-isomorphic-compiler`
-- Optimizes compilation by using [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
+- Optimizes compilation by using in-memory filesystem
 - Delays responses until the aggregated compiler finishes
 - Calls `next(err)` if the aggregated compilation failed
 - Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals) and call `next()` if the aggregated compilation succeeds
+
+Note that this module already uses [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) internally.
 
 
 ```js
@@ -80,10 +82,10 @@ app.use(webpackHotMiddleware(isomorphicCompiler.client.webpackCompiler, { quiet:
 
 // Catch all route to attempt to render our isomorphic app
 app.get('*', (req, res, next) => {
-    // res.isomorphicDevMiddleware contains `stats` & `exports` properties:
+    // res.isomorphicCompilation contains `stats` & `exports` properties:
     // - `stats` contains the client & server stats
     // - `exports` contains the server exports, usually one or more render functions
-    const { render } = res.isomorphicDevMiddleware.exports;
+    const { render } = res.isomorphicCompilation.exports;
 
     render({ req, res })
     .catch((err) => setImmediate(() => next(err)));
