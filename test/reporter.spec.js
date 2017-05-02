@@ -33,7 +33,7 @@ describe('output', () => {
         ))
         .then(() => new Promise((resolve) => {
             compiler.once('begin', resolve);
-            fs.writeFileSync(configClientBasic.entry, fs.readFileSync(configClientBasic.entry));
+            fs.writeFileSync(configServerBasic.entry, fs.readFileSync(configServerBasic.entry));
         }))
         .then(() => (
             request(app)
