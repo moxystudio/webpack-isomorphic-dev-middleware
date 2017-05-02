@@ -97,7 +97,7 @@ Available options:
 | Name   | Description   | Type     | Default |
 | ------ | ------------- | -------- | ------- |
 | memoryFs | Either disable or enable in-memory filesystem | boolean | true |
-| watchOptions | Options to pass to [compiler.watch(options)](https://github.com/moxystudio/webpack-isomorphic-compiler#watchoptions-handler) or `false` to not call watch() | object/boolean | null |
+| watchOptions | Options to pass to [compiler.watch(options)](https://github.com/moxystudio/webpack-isomorphic-compiler#watchoptions-handler) or falsy to not call watch() | object/boolean | null |
 | headers | Headers to be sent when serving compilation files | object | null |
 
 
