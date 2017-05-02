@@ -38,9 +38,9 @@ describe('middleware', () => {
         return request(app)
         .get('/client.js')
         .expect(500)
-        .expect(/\bclient-side\b/i)
-        .expect(/\bfailed\b/i)
-        .expect(/Hello!/);
+        .expect((res) => {
+            expect(res.text).toMatchSnapshot();
+        });
     });
 
     it('should render error if it fails to load the server bundle', () => {
@@ -54,8 +54,9 @@ describe('middleware', () => {
         return request(app)
         .get('/client.js')
         .expect(500)
-        .expect(/\bfoo\b/i)
-        .expect(/\bnot defined\b/i);
+        .expect((res) => {
+            expect(res.text.replace(/- [\s\S]+(The error above was thrown)/, '[stack]\n\n$1')).toMatchSnapshot();
+        });
     });
 
     it('should call next(err) if not a middleware error', () => {

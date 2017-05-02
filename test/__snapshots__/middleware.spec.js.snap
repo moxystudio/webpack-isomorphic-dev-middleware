@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`middleware should render error if it fails to load the server bundle 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>webpack-isomorphic-dev-middleware error</title>
+</head>
+<body>
+<pre>ReferenceError: foo is not defined
+[stack]
+
+The error above was thrown while trying to load the built server file:
+test/tmp/jou8lmk-j282pdx4/server.js
+</pre>
+</body>
+</html>"
+`;
+
+exports[`middleware should wait for a failed compilation and render the webpack stats 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>webpack-isomorphic-dev-middleware error</title>
+</head>
+<body>
+<pre>Webpack client-side compilation failed
+
+ERROR in ./test/configs/files/syntax-error.js
+Module parse failed: /Users/andrecruz/Work/moxy/moxy/webpack-isomorphic-dev-middleware/test/configs/files/syntax-error.js Unexpected token (4:0)
+You may need an appropriate loader to handle this file type.
+| 
+| console.log(&#39;Hello!&#39;
+| 
+</pre>
+</body>
+</html>"
+`;
