@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`output human errors should not check human errors if options.watchOptions.report is falsy 1`] = `""`;
+
+exports[`output human errors should not warn about hashes are being used in webpack config if options.memoryFs = false 1`] = `
+"• Compiling...
+✓ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    client.js  x.xx kB       0  [emitted]  main
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+
+"
+`;
+
+exports[`output human errors should warn if hashes are being used in webpack config 1`] = `
+"• Compiling...
+✓ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    client.js  x.xx kB       0  [emitted]  main
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+
+WARN: Assets with an hash in its name was detected on the server:
+- output.a1aaaaaaaaaaaaaaaaaaaaaaa.js
+
+This is known to cause memory leaks with webpack-dev-middleware's in-memory filesystem.
+Either avoid having hashes in development or disable in-memory filesystem through the \`memoryFs\` option.
+If you feel this was a false positive, please ignore this warning.
+
+"
+`;
+
+exports[`output should not report anything if watchOptions.report is falsy 1`] = `""`;
+
+exports[`output should report stats only once by default 1`] = `
+"• Compiling...
+✓ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    client.js  x.xx kB       0  [emitted]  main
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset     Size  Chunks             Chunk Names
+    server.js  x.xx kB       0  [emitted]  main
+
+• Compiling...
+✓ Compilation succeeded (10ms)
+
+"
+`;
