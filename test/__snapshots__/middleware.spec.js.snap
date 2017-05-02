@@ -12,7 +12,7 @@ exports[`middleware should render error if it fails to load the server bundle 1`
 [stack]
 
 The error above was thrown while trying to load the built server file:
-test/tmp/jou8lmk-j282pdx4/server.js
+test/tmp/server.js
 </pre>
 </body>
 </html>"
@@ -29,7 +29,7 @@ exports[`middleware should wait for a failed compilation and render the webpack 
 <pre>Webpack client-side compilation failed
 
 ERROR in ./test/configs/files/syntax-error.js
-Module parse failed: /Users/andrecruz/Work/moxy/moxy/webpack-isomorphic-dev-middleware/test/configs/files/syntax-error.js Unexpected token (4:0)
+Module parse failed: test/configs/files/syntax-error.js Unexpected token (4:0)
 You may need an appropriate loader to handle this file type.
 | 
 | console.log(&#39;Hello!&#39;

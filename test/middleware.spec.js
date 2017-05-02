@@ -5,6 +5,7 @@ const express = require('express');
 const request = require('supertest');
 const webpackIsomorphicDevMiddleware = require('../');
 const createCompiler = require('./util/createCompiler');
+const normalizeHtmlError = require('./util/normalizeHtmlError');
 const configClientBasic = require('./configs/client-basic');
 const configServerBasic = require('./configs/server-basic');
 const configClientSyntaxError = require('./configs/client-syntax-error');
@@ -39,7 +40,7 @@ describe('middleware', () => {
         .get('/client.js')
         .expect(500)
         .expect((res) => {
-            expect(res.text).toMatchSnapshot();
+            expect(normalizeHtmlError(res.text)).toMatchSnapshot();
         });
     });
 
@@ -55,7 +56,7 @@ describe('middleware', () => {
         .get('/client.js')
         .expect(500)
         .expect((res) => {
-            expect(res.text.replace(/- [\s\S]+(The error above was thrown)/, '[stack]\n\n$1')).toMatchSnapshot();
+            expect(normalizeHtmlError(res.text)).toMatchSnapshot();
         });
     });
 
