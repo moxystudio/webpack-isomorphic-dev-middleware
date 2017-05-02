@@ -11,7 +11,7 @@ function createOutputStream() {
 
     return Object.assign(writableStream, {
         _write(chunk, encoding, callback) {
-            output += chunk.toString();
+            output += chunk;
             callback();
         },
 
