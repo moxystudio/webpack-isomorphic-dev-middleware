@@ -32,8 +32,8 @@ describe('output', () => {
             .expect(200)
         ))
         .then(() => new Promise((resolve) => {
-            fs.writeFileSync(configClientBasic.entry, fs.readFileSync(configClientBasic.entry));
             compiler.once('begin', resolve);
+            fs.writeFileSync(configClientBasic.entry, fs.readFileSync(configClientBasic.entry));
         }))
         .then(() => (
             request(app)
