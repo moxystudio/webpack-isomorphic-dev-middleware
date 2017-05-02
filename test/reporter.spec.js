@@ -31,11 +31,10 @@ describe('output', () => {
             .get('/client.js')
             .expect(200)
         ))
-        .then(() => {
+        .then(() => new Promise((resolve) => {
             fs.writeFileSync(configClientBasic.entry, fs.readFileSync(configClientBasic.entry));
-
-            return new Promise((resolve) => compiler.once('begin', resolve));
-        })
+            compiler.once('begin', resolve);
+        }))
         .then(() => (
             request(app)
             .get('/client.js')
