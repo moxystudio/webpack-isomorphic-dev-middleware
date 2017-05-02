@@ -8,6 +8,7 @@ const createCompiler = require('./util/createCompiler');
 const configClientBasic = require('./configs/client-basic');
 const configServerBasic = require('./configs/server-basic');
 const configClientSyntaxError = require('./configs/client-syntax-error');
+const configServerRuntimeError = require('./configs/server-runtime-error');
 
 describe('middleware', () => {
     afterEach(() => createCompiler.teardown());
@@ -42,14 +43,25 @@ describe('middleware', () => {
         .expect(/Hello!/);
     });
 
-    it('should call next(err) if this is not a middleware error', () => {
+    it('should render error if it fails to load the server bundle', () => {
+        const app = express();
+        const compiler = createCompiler(configClientBasic, configServerRuntimeError);
+
+        app.use(webpackIsomorphicDevMiddleware(compiler, {
+            watchOptions: { report: false },
+        }));
+
+        return request(app)
+        .get('/client.js')
+        .expect(500)
+        .expect(/\bfoo\b/i)
+        .expect(/\bnot defined\b/i);
+    });
+
+    it('should call next(err) if not a middleware error', () => {
         const app = express();
         const compiler = createCompiler(configClientBasic, configServerBasic);
         const contrivedError = new Error('foo');
-
-        compiler.client.webpackCompiler.plugin('watch-run', (compiler, callback) => {
-            setImmediate(() => callback(contrivedError));
-        });
 
         app.use((req, res, next) => {
             next(contrivedError);
