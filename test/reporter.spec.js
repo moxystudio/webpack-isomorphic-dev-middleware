@@ -34,7 +34,7 @@ describe('output', () => {
         .then(() => new Promise((resolve) => {
             compiler.once('begin', resolve);
             // Need to add a little delay otherwise webpack won't pick it up.. I think this is a chokidar bug..
-            setTimeout(() => fs.writeFileSync(configServerBasic.entry, fs.readFileSync(configServerBasic.entry), 50));
+            setTimeout(() => fs.writeFileSync(configServerBasic.entry, fs.readFileSync(configServerBasic.entry)), 50);
         }))
         .then(() => (
             request(app)
