@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const pTry = require('p-try');
 const express = require('express');
 const request = require('supertest');
 const webpackIsomorphicDevMiddleware = require('../');
@@ -129,6 +130,39 @@ describe('middleware', () => {
             expect(isomorphicCompilation).toHaveProperty('stats.server');
             expect(isomorphicCompilation).toHaveProperty('exports.render');
         });
+    });
+
+    it('should cache the res.locals.isomorphicCompilation', () => {
+        const app = express();
+        const compiler = createCompiler(configClientBasic, configServerBasic);
+        let isomorphicCompilation;
+
+        app.use(webpackIsomorphicDevMiddleware(compiler, {
+            watchOptions: { report: false },
+        }));
+
+        app.get('*', (req, res) => {
+            if (!isomorphicCompilation) {
+                isomorphicCompilation = res.locals.isomorphicCompilation;
+            } else {
+                expect(res.locals.isomorphicCompilation).toBe(isomorphicCompilation);
+            }
+
+            res.send('Yes it works!');
+        });
+
+        return pTry(() => (
+            request(app)
+            .get('/')
+            .expect(200)
+            .expect('Yes it works!')
+        ))
+        .then(() => (
+            request(app)
+            .get('/')
+            .expect(200)
+            .expect('Yes it works!')
+        ));
     });
 
     it('should not use in-memory filesystem if options.memoryFs = false', () => {
