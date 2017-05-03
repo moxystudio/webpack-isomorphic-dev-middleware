@@ -44,7 +44,30 @@ describe('middleware', () => {
         });
     });
 
-    it('should render error if it fails to load the server bundle', () => {
+    it('should render error if an error occurred while reading the server bundle', () => {
+        const app = express();
+        const compiler = createCompiler(configClientBasic, configServerRuntimeError);
+
+        app.use(webpackIsomorphicDevMiddleware(compiler, {
+            watchOptions: { report: false },
+        }));
+
+        compiler.server.webpackCompiler.outputFileSystem.readFile = (...args) => {
+            args[args.length - 1](new Error('Failed to read file'));
+        };
+        compiler.server.webpackCompiler.outputFileSystem.readFileSync = () => {
+            throw new Error('Failed to read file');
+        };
+
+        return request(app)
+        .get('/client.js')
+        .expect(500)
+        .expect((res) => {
+            expect(normalizeHtmlError(res.text)).toMatchSnapshot();
+        });
+    });
+
+    it('should render error if i the server bundle has a runtime error', () => {
         const app = express();
         const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 

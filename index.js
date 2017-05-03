@@ -2,6 +2,8 @@
 
 const compose = require('compose-middleware').compose;
 const merge = require('lodash.merge');
+const standardFs = require('./lib/fs/standardFs');
+const memoryFs = require('./lib/fs/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
 const renderErrorMiddleware = require('./lib/renderErrorMiddleware');
@@ -13,6 +15,11 @@ function middleware(compiler, options) {
         headers: null,  // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
     }, options);
 
+    // Set output filesystems
+    compiler.client.webpackCompiler.outputFileSystem = options.memoryFs ? memoryFs() : standardFs();
+    compiler.server.webpackCompiler.outputFileSystem = options.memoryFs ? memoryFs() : standardFs();
+
+    // Create middleware by composing our parts
     const middleware = compose([
         mainMiddleware(compiler, options),
         devMiddleware(compiler, options),

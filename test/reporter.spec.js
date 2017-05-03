@@ -33,8 +33,9 @@ describe('output', () => {
         ))
         .then(() => new Promise((resolve) => {
             compiler.once('begin', resolve);
-            // Need to add a little delay otherwise webpack won't pick it up.. I think this is a chokidar bug..
-            setTimeout(() => fs.writeFileSync(configServerBasic.entry, fs.readFileSync(configServerBasic.entry)), 50);
+            // Need to add a little delay otherwise webpack won't pick it up..
+            // This happens because the file is being written while chokidar is not yet ready (`ready` event not yet emitted)
+            setTimeout(() => fs.writeFileSync(configServerBasic.entry, fs.readFileSync(configServerBasic.entry)), 200);
         }))
         .then(() => (
             request(app)

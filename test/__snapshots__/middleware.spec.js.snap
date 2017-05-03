@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`middleware should render error if it fails to load the server bundle 1`] = `
+exports[`middleware should render error if an error occurred while reading the server bundle 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>webpack-isomorphic-dev-middleware error</title>
+</head>
+<body>
+<pre>Failed to read file
+[stack]
+
+The error above was thrown while trying to load the built server file:
+test/tmp/server.js
+</pre>
+</body>
+</html>"
+`;
+
+exports[`middleware should render error if i the server bundle has a runtime error 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 <head>
