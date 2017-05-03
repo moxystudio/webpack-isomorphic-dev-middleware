@@ -58,7 +58,7 @@
     "webpack-isomorphic-compiler": "^0.3.0"
   },
   "peerDependencies": {
-    "webpack-isomorphic-compiler": "^0.1.0"
+    "webpack-isomorphic-compiler": "^0.3.2"
   },
   "jest": {
     "modulePathIgnorePatterns": [
