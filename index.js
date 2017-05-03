@@ -16,8 +16,10 @@ function middleware(compiler, options) {
     }, options);
 
     // Set output filesystems
-    compiler.client.webpackCompiler.outputFileSystem = options.memoryFs ? memoryFs() : standardFs();
-    compiler.server.webpackCompiler.outputFileSystem = options.memoryFs ? memoryFs() : standardFs();
+    const fs = options.memoryFs ? memoryFs() : standardFs();
+
+    compiler.client.webpackCompiler.outputFileSystem = fs;
+    compiler.server.webpackCompiler.outputFileSystem = fs;
 
     // Create middleware by composing our parts
     const middleware = compose([
