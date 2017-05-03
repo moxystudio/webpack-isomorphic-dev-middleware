@@ -56,9 +56,6 @@ describe('middleware', () => {
         compiler.server.webpackCompiler.outputFileSystem.readFile = (...args) => {
             args[args.length - 1](new Error('Failed to read file'));
         };
-        compiler.server.webpackCompiler.outputFileSystem.readFileSync = () => {
-            throw new Error('Failed to read file');
-        };
 
         return request(app)
         .get('/client.js')
@@ -151,6 +148,8 @@ describe('middleware', () => {
             res.send('Yes it works!');
         });
 
+        const spy = jest.spyOn(compiler.server.webpackCompiler.outputFileSystem, 'readFile');
+
         return pTry(() => (
             request(app)
             .get('/')
@@ -162,7 +161,10 @@ describe('middleware', () => {
             .get('/')
             .expect(200)
             .expect('Yes it works!')
-        ));
+        ))
+        .then(() => {
+            expect(spy.mock.calls).toHaveLength(1);
+        });
     });
 
     it('should not use in-memory filesystem if options.memoryFs = false', () => {
