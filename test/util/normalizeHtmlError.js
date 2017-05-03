@@ -8,7 +8,8 @@ function normalizeHtmlError(html) {
     // Remove absolute directory references
     .replace(new RegExp(escapeRegExp(process.cwd() + path.sep), 'g'), '')
     // Remove stack traces done by pretty-error
-    .replace(/- [\s\S]+(The error above was thrown)/, '[stack]\n\n$1')
+    // <span class=\\"ansi-bright-black-fg\\">
+    .replace(/<span class="ansi-bright-black-fg">[\s\S]+(The error above was thrown)/, '[stack]\n\n$1')
     // Normalize tmp directory
     .replace(/\btest[/\\]tmp\/[^/\\]+\//g, 'test/tmp/');
 }
