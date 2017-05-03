@@ -46,8 +46,7 @@ exports[`middleware should render error if an error occurred while reading the s
 [stack]
 
 The error above was thrown while trying to load the built server file:
-test/tmp/server.js
-</body>
+test/tmp/server.js</body>
 </html>"
 `;
 
@@ -97,8 +96,7 @@ exports[`middleware should render error if the server file has a runtime error 1
 [stack]
 
 The error above was thrown while trying to load the built server file:
-test/tmp/server.js
-</body>
+test/tmp/server.js</body>
 </html>"
 `;
 
@@ -151,7 +149,6 @@ Module parse failed: test/configs/files/syntax-error.js Unexpected token (4:0)
 You may need an appropriate loader to handle this file type.
 | 
 | console.log(&#39;Hello!&#39;
-| </span>
-</body>
+| </span></body>
 </html>"
 `;
