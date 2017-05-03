@@ -18,7 +18,7 @@
 
 The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) but for isomorphic applications.
 
-![Showcase](http://i.imgur.com/ere1oxN.gif)
+![Showcase](http://i.imgur.com/y1JWx61.gif)
 
 
 ## Installation
