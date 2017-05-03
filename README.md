@@ -37,7 +37,7 @@ This is complex, especially setting up the development server:
 
 - You must wait for both compilers to finish, delaying the server responses until then
 - If the client or server compilation fails, an error page should be served
-- When the server compilations succeeds, we must re-require our server bundle to get its new exports
+- When the server compilations succeeds, we must re-require the server file to get its new exports
 - The client and server compilers must be in sync and live in perfect harmony
 
 To solve the compilation part, [webpack-isomorphic-compiler](https://github.com/moxystudio/webpack-isomorphic-compiler) offers an aggregated compiler that syncs up the client and server compilation.

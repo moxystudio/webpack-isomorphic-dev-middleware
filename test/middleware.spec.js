@@ -44,7 +44,7 @@ describe('middleware', () => {
         });
     });
 
-    it('should render error if an error occurred while reading the server bundle', () => {
+    it('should render error if an error occurred while reading the server file', () => {
         const app = express();
         const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 
@@ -67,7 +67,7 @@ describe('middleware', () => {
         });
     });
 
-    it('should render error if i the server bundle has a runtime error', () => {
+    it('should render error if the server file has a runtime error', () => {
         const app = express();
         const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`middleware should render error if an error occurred while reading the server bundle 1`] = `
+exports[`middleware should render error if an error occurred while reading the server file 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 <head>
@@ -18,7 +18,7 @@ test/tmp/server.js
 </html>"
 `;
 
-exports[`middleware should render error if i the server bundle has a runtime error 1`] = `
+exports[`middleware should render error if the server file has a runtime error 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 <head>
