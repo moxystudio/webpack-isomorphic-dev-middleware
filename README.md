@@ -11,7 +11,7 @@
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/webpack-isomorphic-dev-middleware/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/webpack-isomorphic-dev-middleware
 [david-dm-image]:https://img.shields.io/david/moxystudio/webpack-isomorphic-dev-middleware.svg
-[david-dm-dev-url]:https://david-dm.org/moxystudio/webpack-isomorphic-dev-middleware#info=devDependencies
+[david-dm-dev-url]:https://david-dm.org/moxystudio/webpack-isomorphic-dev-middleware?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/webpack-isomorphic-dev-middleware.svg
 [greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/webpack-isomorphic-dev-middleware.svg
 [greenkeeper-url]:https://greenkeeper.io
