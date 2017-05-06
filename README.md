@@ -97,7 +97,7 @@ app.use(webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler, { /* opti
 ```
 
 ```js
-// A webpack multi-compiler where the first and second indexes belongto the client
+// A webpack multi-compiler where the first and second indexes belong to the client
 // and server respectively, see https://webpack.js.org/api/node
 const compiler = webpack([/* webpack client config */, /* webpack server config */]);
 
@@ -107,7 +107,8 @@ app.use(webpackIsomorphicDevMiddleware(compiler, { /* options */ }));
 ```js
 // This module uses https://github.com/moxystudio/webpack-isomorphic-compiler
 // You can use it directly instead!
-const isomorphicCompiler = webpackIsomorphicCompiler(/* webpack client config */, /* webpack server config */);
+const isomorphicCompiler = webpackIsomorphicCompiler(/* webpack client config */,
+/* webpack server config */);
 
 app.use(webpackIsomorphicDevMiddleware(isomorphicCompiler, { /* options */ }));
 ```
