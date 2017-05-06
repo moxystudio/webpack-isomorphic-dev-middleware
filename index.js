@@ -2,7 +2,7 @@
 
 const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
 const compose = require('compose-middleware').compose;
-const merge = require('lodash.merge');
+const mergeOptions = require('merge-options');
 const standardFs = require('./lib/fs/standardFs');
 const memoryFs = require('./lib/fs/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
@@ -40,7 +40,7 @@ function parseArgs(args) {
 }
 
 function parseOptions(options) {
-    options = merge({
+    options = mergeOptions({
         memoryFs: true,  // Enable memory fs
         report: { stats: 'once' },  // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter
 
