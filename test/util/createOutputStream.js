@@ -5,6 +5,21 @@ const WritableStream = require('stream').Writable;
 const stripAnsi = require('strip-ansi');
 const escapeRegExp = require('lodash.escaperegexp');
 
+function normalizeReporterOutput(str) {
+    str = str
+    // Replace (xxxms) with (10ms)
+    .replace(/\(\d+ms\)/g, '(10ms)')
+    // Remove any file sizes
+    .replace(/\d+\.\d+\skB/g, 'x.xx kB')
+    // Remove stack traces done by pretty-error
+    .replace(new RegExp(`${escapeRegExp('    [0m')}.+`, 'g'), '    [stack]')
+    .replace(/(\s{4}\[stack\])([\s\S]+\[stack\])*/, '$1')
+    // Remove absolute directory references
+    .replace(new RegExp(escapeRegExp(process.cwd() + path.sep), 'g'), '');
+
+    return stripAnsi(str);
+}
+
 function createOutputStream() {
     let output = '';
     const writableStream = new WritableStream();
@@ -16,24 +31,14 @@ function createOutputStream() {
         },
 
         getOutput() {
-            return stripAnsi(output);
+            return output;
         },
 
         getReportOutput() {
-            const str = output
-            // Replace (xxxms) with (10ms)
-            .replace(/\(\d+ms\)/g, '(10ms)')
-            // Remove any file sizes
-            .replace(/\d+\.\d+\skB/g, 'x.xx kB')
-            // Remove stack traces done by pretty-error
-            .replace(new RegExp(`${escapeRegExp('    [0m')}.+`, 'g'), '    [stack]')
-            .replace(/(\s{4}\[stack\])([\s\S]+\[stack\])*/, '$1')
-            // Remove absolute directory references
-            .replace(new RegExp(escapeRegExp(process.cwd() + path.sep), 'g'), '');
-
-            return stripAnsi(str);
+            return normalizeReporterOutput(output);
         },
     });
 }
 
 module.exports = createOutputStream;
+module.exports.normalizeReporterOutput = normalizeReporterOutput;
