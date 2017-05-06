@@ -4,7 +4,7 @@ const path = require('path');
 const pify = require('pify');
 const pFinally = require('p-finally');
 const rimraf = pify(require('rimraf'));
-const webpackIsomorphicCompiler = require('../../');
+const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
 
 const tmpDir = path.resolve(`${__dirname}/../tmp`);
 const compilers = [];

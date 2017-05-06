@@ -13,7 +13,10 @@ describe('instantiation', () => {
 
     it('should support a webpack multi-compiler', () => {
         const app = express();
-        const multiCompiler = webpack([configClientBasic, configServerBasic]);
+        const multiCompiler = webpack([
+            createCompiler.uniquifyConfig(configClientBasic),
+            createCompiler.uniquifyConfig(configServerBasic),
+        ]);
         const middleware = webpackIsomorphicDevMiddleware(multiCompiler, {
             report: false,
         });
@@ -29,8 +32,8 @@ describe('instantiation', () => {
 
     it('should support two separate webpack compilers', () => {
         const app = express();
-        const clientCompiler = webpack(configClientBasic);
-        const serverCompiler = webpack(configServerBasic);
+        const clientCompiler = webpack(createCompiler.uniquifyConfig(configClientBasic));
+        const serverCompiler = webpack(createCompiler.uniquifyConfig(configServerBasic));
         const middleware = webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler, {
             report: false,
         });
