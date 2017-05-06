@@ -4,30 +4,16 @@ const path = require('path');
 const pify = require('pify');
 const pFinally = require('p-finally');
 const rimraf = pify(require('rimraf'));
-const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
+const webpackIsomorphicCompiler = require('../../');
 
 const tmpDir = path.resolve(`${__dirname}/../tmp`);
 const compilers = [];
 
-function replaceOutputPath(webpackConfig) {
-    if (webpackConfig.output.path.indexOf(tmpDir) !== 0) {
-        throw new Error(`\`webpackConfig.output.path\` must start with ${tmpDir}`);
-    }
-
-    const uid = `${Math.round(Math.random() * 100000000000).toString(36)}-${Date.now().toString(36)}`;
-
-    webpackConfig = Object.assign({}, webpackConfig);
-    webpackConfig.output = Object.assign({}, webpackConfig.output);
-    webpackConfig.output.path = webpackConfig.output.path.replace(tmpDir, path.join(tmpDir, uid));
-
-    return webpackConfig;
-}
-
 // -----------------------------------------------------------
 
 function createCompiler(clientWebpackConfig, serverWebpackConfig) {
-    clientWebpackConfig = replaceOutputPath(clientWebpackConfig);
-    serverWebpackConfig = replaceOutputPath(serverWebpackConfig);
+    clientWebpackConfig = uniquifyConfig(clientWebpackConfig);
+    serverWebpackConfig = uniquifyConfig(serverWebpackConfig);
 
     const compiler = webpackIsomorphicCompiler(clientWebpackConfig, serverWebpackConfig);
 
@@ -69,5 +55,25 @@ function teardown() {
     return Promise.all(promises);
 }
 
+function uniquifyConfig(webpackConfig) {
+    if (webpackConfig.output.path.indexOf(tmpDir) !== 0) {
+        throw new Error(`\`webpackConfig.output.path\` must start with ${tmpDir}`);
+    }
+
+    const uid = `${Math.round(Math.random() * 100000000000).toString(36)}-${Date.now().toString(36)}`;
+
+    webpackConfig = Object.assign({}, webpackConfig);
+    webpackConfig.output = Object.assign({}, webpackConfig.output);
+    webpackConfig.output.path = webpackConfig.output.path.replace(tmpDir, path.join(tmpDir, uid));
+
+    return webpackConfig;
+}
+
+function push(compiler) {
+    compilers.push(compiler);
+}
+
 module.exports = createCompiler;
 module.exports.teardown = teardown;
+module.exports.uniquifyConfig = uniquifyConfig;
+module.exports.push = push;

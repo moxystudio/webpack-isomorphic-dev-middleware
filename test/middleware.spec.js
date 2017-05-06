@@ -20,7 +20,7 @@ describe('middleware', () => {
         const compiler = createCompiler(configClientBasic, configServerBasic);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         return request(app)
@@ -34,7 +34,7 @@ describe('middleware', () => {
         const compiler = createCompiler(configClientSyntaxError, configServerBasic);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         return request(app)
@@ -50,7 +50,7 @@ describe('middleware', () => {
         const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         compiler.server.webpackCompiler.outputFileSystem.readFile = (...args) => {
@@ -70,7 +70,7 @@ describe('middleware', () => {
         const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         return request(app)
@@ -90,7 +90,7 @@ describe('middleware', () => {
             next(contrivedError);
         });
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
         app.use((err, req, res, next) => {  // eslint-disable-line handle-callback-err, no-unused-vars
             expect(err).toBe(contrivedError);
@@ -109,7 +109,7 @@ describe('middleware', () => {
         let isomorphicCompilation;
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         app.get('*', (req, res) => {
@@ -135,7 +135,7 @@ describe('middleware', () => {
         let isomorphicCompilation;
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
         }));
 
         app.get('*', (req, res) => {
@@ -167,13 +167,15 @@ describe('middleware', () => {
         });
     });
 
+    it('should not re-require the server file if it has a runtime error');
+
     it('should not use in-memory filesystem if options.memoryFs = false', () => {
         const app = express();
         const compiler = createCompiler(configClientBasic, configServerBasic);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
             memoryFs: false,
-            watchOptions: { report: false },
+            report: false,
         }));
 
         return request(app)
@@ -202,7 +204,7 @@ describe('middleware', () => {
         const compiler = createCompiler(configClientBasic, configServerBasic);
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: false },
+            report: false,
             headers: { 'X-FOO': 'bar' },
         }));
 

@@ -30,42 +30,39 @@ The current version only works with webpack v2.x.x.
 
 ## Motivation
 
-Building applications powered by webpack with server-side rendering (isomorphic/universal apps) is hard:
+Building applications powered by webpack with server-side rendering (isomorphic/universal apps) is hard.
 
-- When making a production build, you must compile both the client and server
-- When developing, we want to rebuild the client & server whenever code changes and offer hot module replacement
+When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring him the new compiled code without restarting/reload the application. This is complex, especially setting up the development server.
 
-This is complex, especially setting up the development server:
+To make your life easier, `webpack-isomorphic-dev-middleware` offers an express middleware that:
 
-- You must wait for both compilers to finish, delaying the server responses until then
-- If the client or server compilation fails, an error page should be served
-- When the server compilations succeeds, we must re-require the server file to get its new exports
-- The client and server compilers must be in sync and live in perfect harmony
-
-To solve the compilation part, [webpack-isomorphic-compiler](https://github.com/moxystudio/webpack-isomorphic-compiler) offers an aggregated compiler that syncs up the client and server compilation.
-To solve the development part, `webpack-isomorphic-dev-middleware` offers an express middleware that integrates seamlessly with `webpack-isomorphic-compiler`.
+- Looks for code changes in both the client and the server and automatically compiles them
+- Optimizes compilation by using in-memory filesystem
+- Delays responses until the aggregated compiler finishes
+- Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals), which include the webpack stats and the methods exported in your server file
+- Warns about mistakes in your webpack configuration
+- Offers beautiful compilation reporting into your terminal
+- Shows compilation errors in the browser on refresh, similar to the ones you get on the terminal
 
 
 ## Usage
 
-During development we want to build whenever our code changes, in both the client and the server.   
-This middleware makes that insanely easy:
-
 ```js
 const express = require('express');
-const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
+const webpack = require('webpack');
 const webpackIsomorphicDevMiddleware = require('webpack-isomorphic-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const isomorphicCompiler = webpackIsomorphicCompiler(clientConfig, serverConfig);
+const clientCompiler = webpack({ /* webpack client config */ });
+const serverCompiler = webpack({ /* webpack server config */ });
 const app = express();
 
 // Serve any static files from the public folder
 app.use('/', express.static('public', { maxAge: 0, etag: false }));
 // Add the middleware that will wait for both client and server compilations to be ready
-app.use(webpackIsomorphicDevMiddleware(isomorphicCompiler));
+app.use(webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler));
 // You may also add webpack-hot-middleware to provide hot module replacement to the client
-app.use(webpackHotMiddleware(isomorphicCompiler.client.webpackCompiler, { quiet: true }));
+app.use(webpackHotMiddleware(clientCompiler, { quiet: true }));
 
 // Catch all route to attempt to render our isomorphic app
 app.get('*', (req, res, next) => {
@@ -84,19 +81,36 @@ Available options:
 | Name   | Description   | Type     | Default |
 | ------ | ------------- | -------- | ------- |
 | memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
-| watchOptions | Options to pass to [compiler.watch(options)](https://github.com/moxystudio/webpack-isomorphic-compiler#watchoptions-handler) or falsy to not call watch() | object/boolean | `{ report: { stats: 'once' } }` |
+| watchOptions | Options to pass to [compiler.watch()](https://webpack.js.org/configuration/watch/#watchoptions) or falsy to not call watch() | object/boolean | {} |
+| report |  Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter) | `{ stats: 'once' }`
 | headers | Headers to be sent when serving compilation files | object | null |
 
 
-### Perks
+The middleware function is flexible and supports various signatures:
 
-- Looks for code changes and automatically compiles by using [watch](https://github.com/moxystudio/webpack-isomorphic-compiler#watchoptions-handler)
-- Optimizes compilation by using in-memory filesystem
-- Delays responses until the aggregated compiler finishes
-- Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals) and call `next()` if the aggregated compilation succeeds
-- Warns about mistakes in your webpack configuration
-- Beautiful compilation reporting into your terminal
-- Shows compilation errors in the browser on refresh, similar to the ones you get on the terminal
+```js
+// Two separate webpack compilers
+const clientCompiler = webpack({ /* webpack client config */ });
+const serverCompiler = webpack({ /* webpack server config */ });
+
+app.use(webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler, { /* options */ }));
+```
+
+```js
+// A webpack multi-compiler where the first and second indexes belongto the client
+// and server respectively, see https://webpack.js.org/api/node
+const compiler = webpack([/* webpack client config */, /* webpack server config */]);
+
+app.use(webpackIsomorphicDevMiddleware(compiler, { /* options */ }));
+```
+
+```js
+// This module uses https://github.com/moxystudio/webpack-isomorphic-compiler
+// You can use it directly instead!
+const isomorphicCompiler = webpackIsomorphicCompiler(/* webpack client config */, /* webpack server config */);
+
+app.use(webpackIsomorphicDevMiddleware(isomorphicCompiler, { /* options */ }));
+```
 
 
 ## Tests

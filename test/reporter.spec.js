@@ -23,7 +23,7 @@ describe('output', () => {
         const outputStream = createOutputStream();
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: { output: outputStream } },
+            report: { output: outputStream },
         }));
 
         return pTry(() => (
@@ -55,7 +55,7 @@ describe('output', () => {
         process.stderr = outputStream;
 
         app.use(webpackIsomorphicDevMiddleware(compiler, {
-            watchOptions: { report: null },
+            report: false,
         }));
 
         return request(app)
@@ -73,7 +73,7 @@ describe('output', () => {
             const outputStream = createOutputStream();
 
             app.use(webpackIsomorphicDevMiddleware(compiler, {
-                watchOptions: { report: { output: outputStream } },
+                report: { output: outputStream },
             }));
 
             return request(app)
@@ -91,7 +91,7 @@ describe('output', () => {
 
             app.use(webpackIsomorphicDevMiddleware(compiler, {
                 memoryFs: false,
-                watchOptions: { report: { output: outputStream } },
+                report: { output: outputStream },
             }));
 
             return request(app)
@@ -111,7 +111,7 @@ describe('output', () => {
 
             app.use(webpackIsomorphicDevMiddleware(compiler, {
                 memoryFs: false,
-                watchOptions: { report: null },
+                report: false,
             }));
 
             return request(app)
