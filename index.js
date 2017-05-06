@@ -36,7 +36,7 @@ function parseArgs(args) {
         };
     }
 
-    throw new Error('Invalid arguments passed to middleware');
+    throw new TypeError('Invalid arguments passed to middleware');
 }
 
 function parseOptions(options) {
