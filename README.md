@@ -39,7 +39,7 @@ To make your life easier, `webpack-isomorphic-dev-middleware` offers an express 
 - Looks for code changes in both the client and the server and automatically compiles them
 - Optimizes compilation by using in-memory filesystem
 - Delays responses until the aggregated compiler finishes
-- Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals), which include the webpack stats and the methods exported in your server file
+- Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals), which includes the webpack stats and the methods exported in your server file
 - Warns about mistakes in your webpack configuration
 - Offers beautiful compilation reporting into your terminal
 - Shows compilation errors in the browser on refresh, similar to the ones you get on the terminal
