@@ -167,7 +167,36 @@ describe('middleware', () => {
         });
     });
 
-    it('should not re-require the server file if it has a runtime error');
+    it('should not re-require the server file if it has a runtime error', () => {
+        const app = express();
+        const compiler = createCompiler(configClientBasic, configServerRuntimeError);
+
+        app.use(webpackIsomorphicDevMiddleware(compiler, {
+            report: false,
+        }));
+
+        const spy = jest.spyOn(compiler.server.webpackCompiler.outputFileSystem, 'readFile');
+
+        return pTry(() => (
+            request(app)
+            .get('/')
+            .expect(500)
+            .expect((res) => {
+                expect(normalizeHtmlError(res.text)).toMatchSnapshot();
+            })
+        ))
+        .then(() => (
+            request(app)
+            .get('/')
+            .expect(500)
+            .expect((res) => {
+                expect(normalizeHtmlError(res.text)).toMatchSnapshot();
+            })
+        ))
+        .then(() => {
+            expect(spy.mock.calls).toHaveLength(1);
+        });
+    });
 
     it('should not use in-memory filesystem if options.memoryFs = false', () => {
         const app = express();
