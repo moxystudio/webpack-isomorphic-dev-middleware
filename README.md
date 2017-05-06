@@ -34,7 +34,7 @@ Building applications powered by webpack with server-side rendering (isomorphic/
 
 When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring him the new compiled code without restarting/reload the application. This is complex, especially setting up the development server.
 
-To make your life easier, `webpack-isomorphic-dev-middleware` offers an express middleware that:
+To make your development workflow easier to setup, `webpack-isomorphic-dev-middleware` offers an express middleware that:
 
 - Looks for code changes in both the client and the server and automatically compiles them
 - Optimizes compilation by using in-memory filesystem
