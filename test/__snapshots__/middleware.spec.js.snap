@@ -248,7 +248,7 @@ exports[`middleware should wait for a failed compilation and render the webpack 
 Module parse failed: test/configs/files/syntax-error.js Unexpected token (4:0)
 You may need an appropriate loader to handle this file type.
 | 
-| console.log(&#39;Hello!&#39;
+| console.log('Hello!'
 | </span></body>
 </html>"
 `;
