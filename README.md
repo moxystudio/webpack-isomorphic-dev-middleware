@@ -32,7 +32,7 @@ The current version only works with webpack v2.x.x.
 
 Building applications powered by webpack with server-side rendering (isomorphic/universal apps) is hard.
 
-When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring him the new compiled code without restarting/reload the application. This is complex, especially setting up the development server.
+When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring in the new compiled code without restarting/reload the application. This is complex, especially setting up the development server.
 
 To make your development workflow easier to setup, `webpack-isomorphic-dev-middleware` offers an express middleware that:
 
