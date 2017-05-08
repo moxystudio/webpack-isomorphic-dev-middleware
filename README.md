@@ -83,7 +83,7 @@ Available options:
 | memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
 | watchOptions | Options to pass to [compiler.watch()](https://webpack.js.org/configuration/watch/#watchoptions) or falsy to not call watch() | object/boolean | {} |
 | report |  Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter) | `{ stats: 'once' }`
-| headers | Headers to be sent when serving compilation files | object | null |
+| headers | Headers to be sent when serving compiled files | object | null |
 
 
 The middleware function is flexible and supports various signatures:
