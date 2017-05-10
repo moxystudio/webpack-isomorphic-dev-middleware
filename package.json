@@ -44,7 +44,7 @@
     "p-props": "^1.0.0",
     "require-from-string": "^1.2.1",
     "webpack-dev-middleware": "^1.10.2",
-    "webpack-isomorphic-compiler": "^0.4.0"
+    "webpack-isomorphic-compiler": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
