@@ -1,7 +1,7 @@
 {
   "name": "webpack-isomorphic-dev-middleware",
   "version": "0.1.3",
-  "description": "The webpack-dev-middleware but for isomorphic applications.",
+  "description": "The webpack-dev-middleware, but for isomorphic applications.",
   "keywords": [
     "webpack",
     "isomorphic",

@@ -16,7 +16,7 @@
 [greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/webpack-isomorphic-dev-middleware.svg
 [greenkeeper-url]:https://greenkeeper.io
 
-The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) but for isomorphic applications.
+The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), but for isomorphic applications.
 
 ![Showcase](http://i.imgur.com/rgy7QcT.gif)
 
@@ -88,27 +88,34 @@ Available options:
 
 The middleware function is flexible and supports various signatures:
 
+- Two separate webpack compilers
+
 ```js
-// Two separate webpack compilers
 const clientCompiler = webpack({ /* webpack client config */ });
 const serverCompiler = webpack({ /* webpack server config */ });
 
 app.use(webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler, { /* options */ }));
 ```
 
+- A webpack multi-compiler where the first and second indexes belong to the client and server respectively, see https://webpack.js.org/api/node
+
 ```js
-// A webpack multi-compiler where the first and second indexes belong to the client
-// and server respectively, see https://webpack.js.org/api/node
-const compiler = webpack([/* webpack client config */, /* webpack server config */]);
+
+const compiler = webpack([
+    /* webpack client config */,
+    /* webpack server config */,
+]);
 
 app.use(webpackIsomorphicDevMiddleware(compiler, { /* options */ }));
 ```
 
+- A [webpack-isomorphic-compiler](https://github.com/moxystudio/webpack-isomorphic-compiler ) that simplifies compiling isomorphic apps
+
 ```js
-// This module uses https://github.com/moxystudio/webpack-isomorphic-compiler
-// You can use it directly instead!
-const isomorphicCompiler = webpackIsomorphicCompiler(/* webpack client config */,
-/* webpack server config */);
+const isomorphicCompiler = webpackIsomorphicCompiler(
+    /* webpack client config */,
+    /* webpack server config */
+);
 
 app.use(webpackIsomorphicDevMiddleware(isomorphicCompiler, { /* options */ }));
 ```
