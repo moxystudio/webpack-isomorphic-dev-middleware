@@ -55,7 +55,7 @@
     "lint-staged": "^4.0.0",
     "lodash.escaperegexp": "^4.1.2",
     "p-try": "^1.0.0",
-    "strip-ansi": "^3.0.1",
+    "strip-ansi": "^4.0.0",
     "supertest": "^3.0.0",
     "webpack": "^2.5.0"
   },
