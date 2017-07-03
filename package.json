@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-moxy": "^2.0.2",
+    "eslint-config-moxy": "^3.0.0",
     "express": "^4.15.2",
     "husky": "^0.14.0",
     "jest": "^20.0.0",
