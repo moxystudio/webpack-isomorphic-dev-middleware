@@ -13,11 +13,18 @@ function normalizeReporterOutput(str) {
     .replace(/\d+\.\d+\skB/g, 'x.xx kB')
     // Remove stack traces done by pretty-error
     .replace(new RegExp(`${escapeRegExp('    [0m')}.+`, 'g'), '    [stack]')
+    // Coalesce stack to only one entry
     .replace(/(\s{4}\[stack\])([\s\S]+\[stack\])*/, '$1')
     // Remove absolute directory references
     .replace(new RegExp(escapeRegExp(process.cwd() + path.sep), 'g'), '');
 
-    return stripAnsi(str);
+    str = stripAnsi(str);
+
+    // Remove "Asset Size Chunks..." spacing between them
+    str = str
+    .replace(/Asset\s+Size\s+.+/g, (str) => str.replace(/\s+/g, ' '));
+
+    return str;
 }
 
 function createOutputStream() {

@@ -8,12 +8,12 @@ exports[`output human errors should not warn about hashes are being used in webp
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     client.js  x.xx kB       0  [emitted]  main
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
 
 "
@@ -25,12 +25,12 @@ exports[`output human errors should warn if hashes are being used in webpack con
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     client.js  x.xx kB       0  [emitted]  main
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
 
 WARN: Assets with an hash in its name was detected on the server:
@@ -51,12 +51,12 @@ exports[`output should report stats only once by default 1`] = `
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     client.js  x.xx kB       0  [emitted]  main
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    Asset     Size  Chunks             Chunk Names
+    Asset Size Chunks Chunk Names
     server.js  x.xx kB       0  [emitted]  main
 
 • Compiling...

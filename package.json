@@ -31,7 +31,7 @@
     "*.js": "eslint"
   },
   "peerDependencies": {
-    "webpack": "^2.0.0"
+    "webpack": ">=2.0.0 <4.0.0"
   },
   "dependencies": {
     "anser": "^1.3.0",
@@ -44,11 +44,11 @@
     "p-props": "^1.0.0",
     "require-from-string": "^1.2.1",
     "webpack-dev-middleware": "^1.10.2",
-    "webpack-isomorphic-compiler": "^1.0.0"
+    "webpack-isomorphic-compiler": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-moxy": "^2.0.2",
+    "eslint": "^4.0.0",
+    "eslint-config-moxy": "^3.0.0",
     "express": "^4.15.2",
     "husky": "^0.14.0",
     "jest": "^20.0.0",
@@ -57,7 +57,7 @@
     "p-try": "^1.0.0",
     "strip-ansi": "^4.0.0",
     "supertest": "^3.0.0",
-    "webpack": "^2.5.0"
+    "webpack": "^3.0.0"
   },
   "jest": {
     "modulePathIgnorePatterns": [
