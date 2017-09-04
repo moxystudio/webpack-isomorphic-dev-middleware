@@ -44,7 +44,7 @@
     "once": "^1.4.0",
     "p-props": "^1.0.0",
     "require-from-string": "^1.2.1",
-    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-middleware": "^1.12.0",
     "webpack-isomorphic-compiler": "^1.1.0"
   },
   "devDependencies": {
