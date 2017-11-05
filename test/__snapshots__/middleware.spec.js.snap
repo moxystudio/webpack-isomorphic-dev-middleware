@@ -245,7 +245,7 @@ exports[`middleware should wait for a failed compilation and render the webpack 
     <body>Webpack client-side compilation failed
 
 <span class=\\"ansi-red-fg\\">ERROR in ./test/configs/files/syntax-error.js
-Module parse failed: test/configs/files/syntax-error.js Unexpected token (4:0)
+Module parse failed: Unexpected token (4:0)
 You may need an appropriate loader to handle this file type.
 | 
 | console.log('Hello!'
