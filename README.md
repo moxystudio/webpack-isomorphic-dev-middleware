@@ -25,7 +25,7 @@ The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
 
 `$ npm install webpack-isomorphic-dev-middleware --save-dev`
 
-The current version only works with webpack v2.x.x.
+The current version works with webpack v2 and v3.
 
 
 ## Motivation
