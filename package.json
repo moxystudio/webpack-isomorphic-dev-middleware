@@ -21,14 +21,22 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint:staged": "lint-staged",
     "test": "jest --env node --coverage",
-    "test:watch": "rimraf test/tmp && jest --env node --watch",
-    "posttest": "npm run lint",
-    "precommit": "npm run lint:staged"
+    "prerelease": "npm t && npm run lint",
+    "release": "standard-version",
+    "precommit": "lint-staged",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "lint-staged": {
-    "*.js": "eslint"
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ]
   },
   "peerDependencies": {
     "webpack": ">=2.0.0 <4.0.0",
@@ -49,12 +57,14 @@
     "webpack-isomorphic-compiler-notifier": "^1.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^4.3.0",
+    "@commitlint/config-angular": "^4.3.0",
     "eslint": "^4.0.0",
     "eslint-config-moxy": "^3.0.0",
     "express": "^4.15.2",
     "husky": "^0.14.0",
     "jest": "^21.0.0",
-    "lint-staged": "^4.0.0",
+    "lint-staged": "^5.0.0",
     "lodash.escaperegexp": "^4.1.2",
     "p-try": "^1.0.0",
     "strip-ansi": "^4.0.0",
