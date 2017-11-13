@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`middleware should not re-require the server file if it has a runtime error 1`] = `
+exports[`should not re-require the server file if it has a runtime error 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
     <head>
@@ -50,7 +50,7 @@ test/tmp/server.js</body>
 </html>"
 `;
 
-exports[`middleware should not re-require the server file if it has a runtime error 2`] = `
+exports[`should not re-require the server file if it has a runtime error 2`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
     <head>
@@ -100,7 +100,7 @@ test/tmp/server.js</body>
 </html>"
 `;
 
-exports[`middleware should render error if an error occurred while reading the server file 1`] = `
+exports[`should render error if an error occurred while reading the server file 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
     <head>
@@ -150,7 +150,7 @@ test/tmp/server.js</body>
 </html>"
 `;
 
-exports[`middleware should render error if the server file has a runtime error 1`] = `
+exports[`should render error if the server file has a runtime error 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
     <head>
@@ -200,7 +200,7 @@ test/tmp/server.js</body>
 </html>"
 `;
 
-exports[`middleware should wait for a failed compilation and render the webpack stats 1`] = `
+exports[`should wait for a failed compilation and render the webpack stats 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
     <head>

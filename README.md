@@ -82,7 +82,8 @@ Available options:
 | ------ | ------------- | -------- | ------- |
 | memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
 | watchOptions | Options to pass to [compiler.watch()](https://webpack.js.org/configuration/watch/#watchoptions) or false to not call watch() | object/boolean | {} |
-| report |  Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter) | `{ stats: 'once' }`
+| report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter) | `{ stats: 'once' }`
+| notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-notifier/blob/master/README.md) | false |
 | headers | Headers to be sent when serving compiled files | object | null |
 
 
