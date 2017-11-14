@@ -62,7 +62,9 @@ it('should support an isomorphic compiler', () => {
 
 it('should give access to the isomorphic compiler', () => {
     const compiler = createCompiler(configClientBasic, configServerBasic);
-    const middleware = webpackIsomorphicDevMiddleware(compiler, { watchOptions: false });
+    const middleware = webpackIsomorphicDevMiddleware(compiler);
+
+    compiler.watch = () => {};
 
     expect(middleware.isomorphicCompiler).toBe(compiler);
 });

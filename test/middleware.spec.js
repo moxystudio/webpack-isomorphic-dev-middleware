@@ -215,16 +215,16 @@ it('should not use in-memory filesystem if options.memoryFs is false', () => {
     });
 });
 
-it('should not call watch() automatically if options.watchOptions is false', () => {
+it('should watch() with the specified options.watchDelay', (next) => {
     const compiler = createCompiler(configClientBasic, configServerBasic);
-    const spy = jest.spyOn(compiler, 'watch');
+    const now = Date.now();
 
-    webpackIsomorphicDevMiddleware(compiler, {
-        watchOptions: false,
-    });
+    webpackIsomorphicDevMiddleware(compiler, { watchDelay: 100 });
 
-    expect(spy.mock.calls).toHaveLength(0);
-    expect(compiler.isCompiling()).toBe(false);
+    compiler.watch = () => {
+        expect(Date.now() - now).toBeGreaterThanOrEqual(100);
+        next();
+    };
 });
 
 it('should set headers as specified in options.headers', () => {

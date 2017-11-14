@@ -44,13 +44,13 @@ function parseOptions(options) {
     options = merge({
         memoryFs: true,  // Enable memory fs
         watchOptions: {},  // Options to pass to .watch()
+        watchDelay: 0,
         report: { stats: 'once' },  // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter
         notify: false,  // Enable OS notifications, see https://github.com/moxystudio/webpack-isomorphic-compiler-notifier
         headers: null,  // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
     }, options);
 
     // Normalize some options
-    options.watchOptions = options.watchOptions === true ? {} : options.watchOptions;
     options.report = options.report === true ? {} : options.report;
     options.notify = options.notify === true ? {} : options.notify;
 
@@ -81,11 +81,11 @@ function webpackIsomorphicDevMiddleware(...args) {
     // Notify build status through OS notifications
     options.notify !== false && webpackIsomorphicCompilerNotifier(compiler, options.notify);
 
-    // Start watching
-    options.watchOptions !== false && compiler.watch(options.watchOptions);
-
     // Expose isomorphic compiler
     middleware.isomorphicCompiler = compiler;
+
+    // Start watching
+    setTimeout(() => compiler.watch(options.watchOptions), options.watchDelay);
 
     return middleware;
 }
