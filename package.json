@@ -19,6 +19,10 @@
     "type": "git",
     "url": "git@github.com:moxystudio/webpack-isomorphic-dev-middleware"
   },
+  "main": "index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "lint": "eslint .",
     "test": "jest --env node --coverage",
