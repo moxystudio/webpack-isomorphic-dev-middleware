@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^5.0.1",
-    "@commitlint/config-angular": "^4.3.0",
+    "@commitlint/config-angular": "^5.1.1",
     "eslint": "^4.0.0",
     "eslint-config-moxy": "^4.1.0",
     "express": "^4.15.2",
