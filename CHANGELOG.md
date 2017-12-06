@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v2.0.0...v2.0.1) (2017-12-06)
+
+
+### Bug Fixes
+
+* fix check of human errors accessing undefined stats in some cases ([553a401](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/553a401))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v1.5.0...v2.0.0) (2017-11-14)
 
