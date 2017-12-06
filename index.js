@@ -81,11 +81,11 @@ function webpackIsomorphicDevMiddleware(...args) {
     // Notify build status through OS notifications
     options.notify !== false && webpackIsomorphicCompilerNotifier(compiler, options.notify);
 
-    // Expose isomorphic compiler
-    middleware.isomorphicCompiler = compiler;
-
     // Start watching
     setTimeout(() => compiler.watch(options.watchOptions), options.watchDelay);
+
+    // Expose isomorphic compiler
+    middleware.isomorphicCompiler = compiler;
 
     return middleware;
 }
