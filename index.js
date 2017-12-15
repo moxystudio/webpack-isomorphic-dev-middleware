@@ -1,7 +1,8 @@
 'use strict';
 
 const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
-const webpackIsomorphicCompilerNotifier = require('webpack-isomorphic-compiler-notifier');
+const startReporting = require('webpack-isomorphic-compiler-reporter');
+const startNotifying = require('webpack-sane-compiler-notifier');
 const compose = require('compose-middleware').compose;
 const merge = require('lodash.merge');
 const standardFs = require('./lib/fs/standardFs');
@@ -45,8 +46,8 @@ function parseOptions(options) {
         memoryFs: true,  // Enable memory fs
         watchOptions: {},  // Options to pass to .watch()
         watchDelay: 0,
-        report: { stats: 'once' },  // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter
-        notify: false,  // Enable OS notifications, see https://github.com/moxystudio/webpack-isomorphic-compiler-notifier
+        report: { stats: 'once' },  // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
+        notify: false,  // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
         headers: null,  // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
     }, options);
 
@@ -68,24 +69,28 @@ function webpackIsomorphicDevMiddleware(...args) {
     compiler.client.webpackCompiler.outputFileSystem = fs;
     compiler.server.webpackCompiler.outputFileSystem = fs;
 
+    // Enable reporting
+    if (options.report !== false) {
+        options.report = options.report !== false ? startReporting(compiler, options.report).options : false;
+    }
+
+    // Notify build status through OS notifications
+    if (options.notify !== false) {
+        options.notify = startNotifying(compiler, options.notify).options;
+    }
+
     // Create middleware by composing our parts
     const middleware = compose([
         mainMiddleware(compiler, options),
         devMiddleware(compiler, options),
-        renderErrorMiddleware,
+        renderErrorMiddleware(compiler, options),
     ]);
 
-    // Enable reporting
-    options.report !== false && webpackIsomorphicCompiler.reporter(compiler, options.report);
-
-    // Notify build status through OS notifications
-    options.notify !== false && webpackIsomorphicCompilerNotifier(compiler, options.notify);
+    // Expose isomorphic compiler
+    middleware.compiler = compiler;
 
     // Start watching
     setTimeout(() => compiler.watch(options.watchOptions), options.watchDelay);
-
-    // Expose isomorphic compiler
-    middleware.isomorphicCompiler = compiler;
 
     return middleware;
 }

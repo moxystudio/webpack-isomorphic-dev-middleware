@@ -106,13 +106,15 @@ it('should set res.locals.isomorphicCompilation', () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerBasic);
     let isomorphicCompilation;
+    let exports;
 
     app.use(webpackIsomorphicDevMiddleware(compiler, {
         report: false,
     }));
 
     app.get('*', (req, res) => {
-        isomorphicCompilation = res.locals.isomorphicCompilation;
+        exports = res.locals.isomorphic.exports;
+        isomorphicCompilation = res.locals.isomorphic.compilation;
         res.send('Yes it works!');
     });
 
@@ -122,9 +124,11 @@ it('should set res.locals.isomorphicCompilation', () => {
     .expect('Yes it works!')
     .then(() => {
         expect(isomorphicCompilation).toBeDefined();
-        expect(isomorphicCompilation).toHaveProperty('stats.client');
-        expect(isomorphicCompilation).toHaveProperty('stats.server');
-        expect(isomorphicCompilation).toHaveProperty('exports.render');
+        expect(isomorphicCompilation).toHaveProperty('clientStats');
+        expect(isomorphicCompilation).toHaveProperty('serverStats');
+
+        expect(exports).toBeDefined();
+        expect(exports).toHaveProperty('render');
     });
 });
 

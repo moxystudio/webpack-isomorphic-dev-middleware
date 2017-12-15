@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const WritableStream = require('stream').Writable;
 const stripAnsi = require('strip-ansi');
 const escapeRegExp = require('lodash.escaperegexp');
 
@@ -27,25 +26,27 @@ function normalizeReporterOutput(str) {
     return str;
 }
 
-function createOutputStream() {
+function createWritter() {
     let output = '';
-    const writableStream = new WritableStream();
 
-    return Object.assign(writableStream, {
-        _write(chunk, encoding, callback) {
-            output += chunk;
-            callback();
-        },
+    function write(str) {
+        output += str;
+    }
 
+    return Object.assign(write, {
         getOutput() {
-            return output;
+            return stripAnsi(output);
         },
 
         getReportOutput() {
             return normalizeReporterOutput(output);
         },
+
+        reset() {
+            output = '';
+        },
     });
 }
 
-module.exports = createOutputStream;
+module.exports = createWritter;
 module.exports.normalizeReporterOutput = normalizeReporterOutput;

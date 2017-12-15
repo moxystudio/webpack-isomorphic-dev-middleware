@@ -242,7 +242,7 @@ exports[`should wait for a failed compilation and render the webpack stats 1`] =
         .ansi-underline { text-decoration: underline; }
         </style>
     </head>
-    <body>Webpack client-side compilation failed
+    <body>Webpack compilation failed (client)
 
 <span class=\\"ansi-red-fg\\">ERROR in ./test/configs/files/syntax-error.js
 Module parse failed: Unexpected token (4:0)
