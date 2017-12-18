@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v2.0.1...v3.0.0) (2017-12-18)
+
+
+### Chores
+
+* update webpack-isomorphic-compiler and res.locals signature ([95787fa](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/95787fa))
+
+
+### BREAKING CHANGES
+
+* webpack-isomorphic-compiler now accepts different values for the `report` option.
+* res.locals signature has changed
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v2.0.0...v2.0.1) (2017-12-06)
 
