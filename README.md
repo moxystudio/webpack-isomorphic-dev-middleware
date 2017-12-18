@@ -32,14 +32,14 @@ The current version works with webpack v2 and v3.
 
 Building applications powered by webpack with server-side rendering (isomorphic/universal apps) is hard.
 
-When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring in the new compiled code without restarting/reload the application. This is complex, especially setting up the development server.
+When making a production build, you must compile both the client and server. When developing, we want to rebuild the client & server and bring in the new compiled code without restarting/reloading the application. This is complex, especially setting up the development server.
 
 To make your development workflow easier to setup, `webpack-isomorphic-dev-middleware` offers an express middleware that:
 
 - Looks for code changes in both the client and the server and automatically compiles them
 - Optimizes compilation by using in-memory filesystem
 - Delays responses until the aggregated compiler finishes
-- Adds `isomorphicCompilation` to [res.locals](https://expressjs.com/en/api.html#res.locals), which includes the webpack stats and the methods exported in your server file
+- Adds `isomorphic` to [res.locals](https://expressjs.com/en/api.html#res.locals), which includes the webpack stats and the methods exported in your server file
 - Warns about mistakes in your webpack configuration
 - Offers beautiful compilation reporting into your terminal
 - Shows compilation errors in the browser on refresh, similar to the ones you get on the terminal
@@ -66,10 +66,10 @@ app.use(webpackHotMiddleware(clientCompiler, { quiet: true }));
 
 // Catch all route to attempt to render our isomorphic app
 app.get('*', (req, res, next) => {
-    // res.isomorphicCompilation contains `stats` & `exports` properties:
-    // - `stats` contains the client & server stats
+    // res.isomorphic contains `compilation` & `exports` properties:
+    // - `compilation` contains the webpack-isomorphic-compiler compilation result
     // - `exports` contains the server exports, usually one or more render functions
-    const { render } = res.locals.isomorphicCompilation.exports;
+    const { render } = res.locals.isomorphic.exports;
 
     render({ req, res })
     .catch((err) => setImmediate(() => next(err)));
@@ -83,8 +83,8 @@ Available options:
 | memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
 | watchOptions | Options to pass to webpack\'s watch | [object](https://webpack.js.org/configuration/watch/#watchoptions) | {} |
 | watchDelay | Delay calling webpack\'s watch for the given milliseconds | Number | 0 |
-| report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler/blob/master/README.md#reporter) | `{ stats: 'once' }`
-| notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-notifier/blob/master/README.md) | false |
+| report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-reporter#available-options) | `{ stats: 'once' }`
+| notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-sane-compiler-notifier#available-options) | false |
 | headers | Headers to be sent when serving compiled files | object | null |
 
 
