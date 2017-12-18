@@ -62,7 +62,7 @@
     "p-props": "^1.0.0",
     "require-from-string": "^2.0.0",
     "webpack-dev-middleware": "^1.12.0",
-    "webpack-isomorphic-compiler": "^1.1.0",
+    "webpack-isomorphic-compiler": "^2.0.0",
     "webpack-isomorphic-compiler-notifier": "^1.0.0"
   },
   "devDependencies": {
