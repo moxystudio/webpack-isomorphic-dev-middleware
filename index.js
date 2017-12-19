@@ -71,7 +71,7 @@ function webpackIsomorphicDevMiddleware(...args) {
 
     // Enable reporting
     if (options.report !== false) {
-        options.report = options.report !== false ? startReporting(compiler, options.report).options : false;
+        options.report = startReporting(compiler, options.report).options;
     }
 
     // Notify build status through OS notifications
