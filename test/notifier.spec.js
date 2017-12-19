@@ -1,12 +1,12 @@
 'use strict';
 
-const webpackIsomorphicCompilerNotifier = require('webpack-isomorphic-compiler-notifier');
+const saneNotifier = require('webpack-sane-compiler-notifier');
 const webpackIsomorphicDevMiddleware = require('../');
 const createCompiler = require('./util/createCompiler');
 const configClientBasic = require('./configs/client-basic');
 const configServerBasic = require('./configs/server-basic');
 
-jest.mock('webpack-isomorphic-compiler-notifier', () => jest.fn((compiler) => compiler));
+jest.mock('webpack-sane-compiler-notifier', () => jest.fn((compiler) => compiler));
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -16,7 +16,7 @@ it('should not notify by default', () => {
     webpackIsomorphicDevMiddleware(compiler, { report: false });
     compiler.watch = () => {};
 
-    expect(webpackIsomorphicCompilerNotifier).toHaveBeenCalledTimes(0);
+    expect(saneNotifier).toHaveBeenCalledTimes(0);
 });
 
 it('should notify if options.notify is NOT false', () => {
@@ -27,8 +27,8 @@ it('should notify if options.notify is NOT false', () => {
     webpackIsomorphicDevMiddleware(compiler, { report: false, notify: true });
     webpackIsomorphicDevMiddleware(compiler, { report: false, notify: {} });
 
-    expect(webpackIsomorphicCompilerNotifier).toHaveBeenCalledTimes(2);
-    expect(webpackIsomorphicCompilerNotifier).toHaveBeenCalledWith(compiler, {});
+    expect(saneNotifier).toHaveBeenCalledTimes(2);
+    expect(saneNotifier).toHaveBeenCalledWith(compiler, {});
 });
 
 it('should pass options.notify to webpack-isomorphic-compiler-notifier', () => {
@@ -40,6 +40,6 @@ it('should pass options.notify to webpack-isomorphic-compiler-notifier', () => {
     });
     compiler.watch = () => {};
 
-    expect(webpackIsomorphicCompilerNotifier).toHaveBeenCalledTimes(1);
-    expect(webpackIsomorphicCompilerNotifier).toHaveBeenCalledWith(compiler, { title: 'foo' });
+    expect(saneNotifier).toHaveBeenCalledTimes(1);
+    expect(saneNotifier).toHaveBeenCalledWith(compiler, { title: 'foo' });
 });

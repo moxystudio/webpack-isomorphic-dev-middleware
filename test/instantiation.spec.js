@@ -20,7 +20,7 @@ it('should support a webpack multi-compiler', () => {
         report: false,
     });
 
-    createCompiler.push(middleware.isomorphicCompiler);
+    createCompiler.push(middleware.compiler);
     app.use(middleware);
 
     return request(app)
@@ -37,7 +37,7 @@ it('should support two separate webpack compilers', () => {
         report: false,
     });
 
-    createCompiler.push(middleware.isomorphicCompiler);
+    createCompiler.push(middleware.compiler);
     app.use(middleware);
 
     return request(app)
@@ -66,7 +66,7 @@ it('should give access to the isomorphic compiler', () => {
 
     compiler.watch = () => {};
 
-    expect(middleware.isomorphicCompiler).toBe(compiler);
+    expect(middleware.compiler).toBe(compiler);
 });
 
 it('should throw an error on invalid args', () => {

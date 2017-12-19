@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`human errors should not check human errors if options.report is false 1`] = `
-"• Compiling...
-✓ Compilation succeeded (10ms)
+"● Compiling...
+✔ Compilation succeeded (10ms)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -18,8 +18,8 @@ exports[`human errors should not check human errors if options.report is false 1
 `;
 
 exports[`human errors should not check human errors if options.report.humanErrors is false 1`] = `
-"• Compiling...
-✓ Compilation succeeded (10ms)
+"● Compiling...
+✔ Compilation succeeded (10ms)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,8 +35,8 @@ exports[`human errors should not check human errors if options.report.humanError
 `;
 
 exports[`human errors should not warn about hashes are being used in webpack config if options.memoryFs is false 1`] = `
-"• Compiling...
-✓ Compilation succeeded (10ms)
+"● Compiling...
+✔ Compilation succeeded (10ms)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -52,8 +52,8 @@ exports[`human errors should not warn about hashes are being used in webpack con
 `;
 
 exports[`human errors should warn if hashes are being used in webpack config 1`] = `
-"• Compiling...
-✓ Compilation succeeded (10ms)
+"● Compiling...
+✔ Compilation succeeded (10ms)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -78,8 +78,8 @@ If you feel this was a false positive, please ignore this warning.
 exports[`should not report anything if options.report is false 1`] = `""`;
 
 exports[`should report stats only once by default 1`] = `
-"• Compiling...
-✓ Compilation succeeded (10ms)
+"● Compiling...
+✔ Compilation succeeded (10ms)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -91,8 +91,8 @@ exports[`should report stats only once by default 1`] = `
     Asset Size Chunks Chunk Names
     server.js  x.xx kB       0  [emitted]  main
 
-• Compiling...
-✓ Compilation succeeded (10ms)
+● Compiling...
+✔ Compilation succeeded (10ms)
 
 "
 `;
