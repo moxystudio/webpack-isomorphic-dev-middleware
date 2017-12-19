@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs');
-const pTry = require('p-try');
 const express = require('express');
 const request = require('supertest');
 const webpackIsomorphicDevMiddleware = require('../');
@@ -102,7 +101,7 @@ it('should call next(err) if not a middleware error', () => {
     .expect('Captured contrived error: foo');
 });
 
-it('should set res.locals.isomorphicCompilation', () => {
+it('should set res.locals.isomorphicCompilation', async () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerBasic);
     let isomorphicCompilation;
@@ -118,21 +117,20 @@ it('should set res.locals.isomorphicCompilation', () => {
         res.send('Yes it works!');
     });
 
-    return request(app)
+    await request(app)
     .get('/')
     .expect(200)
-    .expect('Yes it works!')
-    .then(() => {
-        expect(isomorphicCompilation).toBeDefined();
-        expect(isomorphicCompilation).toHaveProperty('clientStats');
-        expect(isomorphicCompilation).toHaveProperty('serverStats');
+    .expect('Yes it works!');
 
-        expect(exports).toBeDefined();
-        expect(exports).toHaveProperty('render');
-    });
+    expect(isomorphicCompilation).toBeDefined();
+    expect(isomorphicCompilation).toHaveProperty('clientStats');
+    expect(isomorphicCompilation).toHaveProperty('serverStats');
+
+    expect(exports).toBeDefined();
+    expect(exports).toHaveProperty('render');
 });
 
-it('should cache the res.locals.isomorphicCompilation', () => {
+it('should cache the res.locals.isomorphicCompilation', async () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerBasic);
     let isomorphicCompilation;
@@ -153,24 +151,20 @@ it('should cache the res.locals.isomorphicCompilation', () => {
 
     const spy = jest.spyOn(compiler.server.webpackCompiler.outputFileSystem, 'readFile');
 
-    return pTry(() => (
-        request(app)
-        .get('/')
-        .expect(200)
-        .expect('Yes it works!')
-    ))
-    .then(() => (
-        request(app)
-        .get('/')
-        .expect(200)
-        .expect('Yes it works!')
-    ))
-    .then(() => {
-        expect(spy.mock.calls).toHaveLength(1);
-    });
+    await request(app)
+    .get('/')
+    .expect(200)
+    .expect('Yes it works!');
+
+    await request(app)
+    .get('/')
+    .expect(200)
+    .expect('Yes it works!');
+
+    expect(spy.mock.calls).toHaveLength(1);
 });
 
-it('should not re-require the server file if it has a runtime error', () => {
+it('should not re-require the server file if it has a runtime error', async () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerRuntimeError);
 
@@ -180,28 +174,22 @@ it('should not re-require the server file if it has a runtime error', () => {
 
     const spy = jest.spyOn(compiler.server.webpackCompiler.outputFileSystem, 'readFile');
 
-    return pTry(() => (
-        request(app)
-        .get('/')
-        .expect(500)
-        .expect((res) => {
-            expect(normalizeHtmlError(res.text)).toMatchSnapshot();
-        })
-    ))
-    .then(() => (
-        request(app)
-        .get('/')
-        .expect(500)
-        .expect((res) => {
-            expect(normalizeHtmlError(res.text)).toMatchSnapshot();
-        })
-    ))
-    .then(() => {
-        expect(spy.mock.calls).toHaveLength(1);
-    });
+    let res = await request(app)
+    .get('/')
+    .expect(500);
+
+    expect(normalizeHtmlError(res.text)).toMatchSnapshot();
+
+    res = await request(app)
+    .get('/')
+    .expect(500);
+
+    expect(normalizeHtmlError(res.text)).toMatchSnapshot();
+
+    expect(spy.mock.calls).toHaveLength(1);
 });
 
-it('should not use in-memory filesystem if options.memoryFs is false', () => {
+it('should not use in-memory filesystem if options.memoryFs is false', async () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerBasic);
 
@@ -210,13 +198,12 @@ it('should not use in-memory filesystem if options.memoryFs is false', () => {
         report: false,
     }));
 
-    return request(app)
+    await request(app)
     .get('/client.js')
-    .expect(200)
-    .then(() => {
-        expect(fs.existsSync(`${compiler.client.webpackConfig.output.path}/client.js`)).toBe(true);
-        expect(fs.existsSync(`${compiler.server.webpackConfig.output.path}/server.js`)).toBe(true);
-    });
+    .expect(200);
+
+    expect(fs.existsSync(`${compiler.client.webpackConfig.output.path}/client.js`)).toBe(true);
+    expect(fs.existsSync(`${compiler.server.webpackConfig.output.path}/server.js`)).toBe(true);
 });
 
 it('should watch() with the specified options.watchDelay', (next) => {

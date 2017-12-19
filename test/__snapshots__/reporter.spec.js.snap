@@ -75,8 +75,6 @@ If you feel this was a false positive, please ignore this warning.
 "
 `;
 
-exports[`should not report anything if options.report is false 1`] = `""`;
-
 exports[`should report stats only once by default 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (10ms)
