@@ -58,7 +58,6 @@
     "lodash.merge": "^4.6.0",
     "memory-fs": "^0.4.1",
     "mkdirp": "^0.5.1",
-    "once": "^1.4.0",
     "p-props": "^1.0.0",
     "require-from-string": "^2.0.0",
     "webpack-dev-middleware": "^2.0.2",
