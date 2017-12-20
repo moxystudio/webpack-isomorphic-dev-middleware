@@ -10,6 +10,7 @@ const memoryFs = require('./lib/fs/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
 const renderErrorMiddleware = require('./lib/renderErrorMiddleware');
+const checkHumanErrors = require('./lib/util/checkHumanErrors');
 
 function parseArgs(args) {
     const [firstArg = {}, secondArg, thirdArg] = args;
@@ -72,6 +73,7 @@ function webpackIsomorphicDevMiddleware(...args) {
     // Enable reporting
     if (options.report !== false) {
         options.report = startReporting(compiler, options.report).options;
+        options.report.humanErrors && compiler.once('end', (compilation) => checkHumanErrors(compilation, options));
     }
 
     // Notify build status through OS notifications
