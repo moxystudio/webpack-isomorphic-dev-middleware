@@ -31,7 +31,7 @@ function parseArgs(args) {
         };
     }
 
-    // Seperate webpack compilers
+    // Separate webpack compilers
     if (firstArg.run && secondArg && secondArg.run) {
         return {
             compiler: webpackIsomorphicCompiler(firstArg, secondArg),
