@@ -5,8 +5,7 @@ const startReporting = require('webpack-isomorphic-compiler-reporter');
 const startNotifying = require('webpack-sane-compiler-notifier');
 const compose = require('compose-middleware').compose;
 const merge = require('lodash.merge');
-const standardFs = require('./lib/fs/standardFs');
-const memoryFs = require('./lib/fs/memoryFs');
+const memoryFs = require('./lib/util/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
 const renderErrorMiddleware = require('./lib/renderErrorMiddleware');
@@ -64,11 +63,13 @@ function parseOptions(options) {
 function webpackIsomorphicDevMiddleware(...args) {
     const { compiler, options } = parseArgs(args);
 
-    // Set output filesystems
-    const fs = options.memoryFs ? memoryFs() : standardFs();
+    // Use an in-memory filesystem
+    if (options.memoryFs) {
+        const fs = memoryFs();
 
-    compiler.client.webpackCompiler.outputFileSystem = fs;
-    compiler.server.webpackCompiler.outputFileSystem = fs;
+        compiler.client.webpackCompiler.outputFileSystem = fs;
+        compiler.server.webpackCompiler.outputFileSystem = fs;
+    }
 
     // Enable reporting
     if (options.report !== false) {
