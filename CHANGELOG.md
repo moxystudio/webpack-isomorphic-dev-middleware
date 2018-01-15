@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.0.1...v3.1.0) (2018-01-15)
+
+
+### Bug Fixes
+
+* **package:** update compose-middleware to version 4.0.0 ([40db91f](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/40db91f))
+
+
+### Features
+
+* only override the compiler's output `fs` when `memoryFs` is true ([89ae9b8](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/89ae9b8))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.0.0...v3.0.1) (2017-12-21)
 
