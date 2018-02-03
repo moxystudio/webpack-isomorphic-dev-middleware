@@ -58,8 +58,6 @@ function parseOptions(options) {
     return options;
 }
 
-// -----------------------------------------------------------
-
 function webpackIsomorphicDevMiddleware(...args) {
     const { compiler, options } = parseArgs(args);
 

@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.1.0...v3.2.0) (2018-02-03)
+
+
+### Bug Fixes
+
+* **package:** update webpack-isomorphic-compiler to version 3.0.0 ([726552e](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/726552e))
+
+
+### Features
+
+* update webpack-isomorphic-compiler to v3 ([58b63ea](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/58b63ea))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.0.1...v3.1.0) (2018-01-15)
 
