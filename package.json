@@ -62,8 +62,8 @@
     "require-from-string": "^2.0.0",
     "webpack-dev-middleware": "^2.0.2",
     "webpack-isomorphic-compiler": "^3.0.0",
-    "webpack-isomorphic-compiler-reporter": "^1.0.2",
-    "webpack-sane-compiler-notifier": "^2.0.1"
+    "webpack-isomorphic-compiler-reporter": "^1.3.0",
+    "webpack-sane-compiler-notifier": "^2.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.1",

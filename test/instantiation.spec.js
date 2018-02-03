@@ -12,10 +12,8 @@ afterEach(() => createCompiler.teardown());
 
 it('should support a webpack multi-compiler', () => {
     const app = express();
-    const multiCompiler = webpack([
-        createCompiler.uniquifyConfig(configClientBasic),
-        createCompiler.uniquifyConfig(configServerBasic),
-    ]);
+    const configs = createCompiler.uniquifyConfigs({ client: configClientBasic, server: configServerBasic });
+    const multiCompiler = webpack([configs.client, configs.server]);
     const middleware = webpackIsomorphicDevMiddleware(multiCompiler, {
         report: false,
     });
@@ -31,8 +29,9 @@ it('should support a webpack multi-compiler', () => {
 
 it('should support two separate webpack compilers', () => {
     const app = express();
-    const clientCompiler = webpack(createCompiler.uniquifyConfig(configClientBasic));
-    const serverCompiler = webpack(createCompiler.uniquifyConfig(configServerBasic));
+    const configs = createCompiler.uniquifyConfigs({ client: configClientBasic, server: configServerBasic });
+    const clientCompiler = webpack(configs.client);
+    const serverCompiler = webpack(configs.server);
     const middleware = webpackIsomorphicDevMiddleware(clientCompiler, serverCompiler, {
         report: false,
     });

@@ -91,6 +91,5 @@ exports[`should report stats only once by default 1`] = `
 
 ● Compiling...
 ✔ Compilation succeeded (10ms)
-
 "
 `;

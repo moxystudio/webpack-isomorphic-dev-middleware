@@ -9,13 +9,9 @@ const webpackIsomorphicCompiler = require('webpack-isomorphic-compiler');
 const tmpDir = path.resolve(`${__dirname}/../tmp`);
 const compilers = [];
 
-// -----------------------------------------------------------
-
 function createCompiler(clientWebpackConfig, serverWebpackConfig) {
-    clientWebpackConfig = uniquifyConfig(clientWebpackConfig);
-    serverWebpackConfig = uniquifyConfig(serverWebpackConfig);
-
-    const compiler = webpackIsomorphicCompiler(clientWebpackConfig, serverWebpackConfig);
+    const configs = uniquifyConfigs({ client: clientWebpackConfig, server: serverWebpackConfig });
+    const compiler = webpackIsomorphicCompiler(configs.client, configs.server);
 
     compilers.push(compiler);
 
@@ -55,18 +51,28 @@ function teardown() {
     return Promise.all(promises);
 }
 
-function uniquifyConfig(webpackConfig) {
-    if (webpackConfig.output.path.indexOf(tmpDir) !== 0) {
-        throw new Error(`\`webpackConfig.output.path\` must start with ${tmpDir}`);
+function uniquifyConfigs({ client: clientWebpackConfig, server: serverWebpackConfig }) {
+    if (clientWebpackConfig.output.path.indexOf(tmpDir) !== 0) {
+        throw new Error(`Client \`webpackConfig.output.path\` must start with ${tmpDir}`);
+    }
+    if (serverWebpackConfig.output.path.indexOf(tmpDir) !== 0) {
+        throw new Error(`Server \`webpackConfig.output.path\` must start with ${tmpDir}`);
     }
 
     const uid = `${Math.round(Math.random() * 100000000000).toString(36)}-${Date.now().toString(36)}`;
 
-    webpackConfig = Object.assign({}, webpackConfig);
-    webpackConfig.output = Object.assign({}, webpackConfig.output);
-    webpackConfig.output.path = webpackConfig.output.path.replace(tmpDir, path.join(tmpDir, uid));
+    clientWebpackConfig = Object.assign({}, clientWebpackConfig);
+    clientWebpackConfig.output = Object.assign({}, clientWebpackConfig.output);
+    clientWebpackConfig.output.path = clientWebpackConfig.output.path.replace(tmpDir, path.join(tmpDir, uid));
 
-    return webpackConfig;
+    serverWebpackConfig = Object.assign({}, serverWebpackConfig);
+    serverWebpackConfig.output = Object.assign({}, serverWebpackConfig.output);
+    serverWebpackConfig.output.path = serverWebpackConfig.output.path.replace(tmpDir, path.join(tmpDir, uid));
+
+    return {
+        client: clientWebpackConfig,
+        server: serverWebpackConfig,
+    };
 }
 
 function push(compiler) {
@@ -75,5 +81,5 @@ function push(compiler) {
 
 module.exports = createCompiler;
 module.exports.teardown = teardown;
-module.exports.uniquifyConfig = uniquifyConfig;
+module.exports.uniquifyConfigs = uniquifyConfigs;
 module.exports.push = push;
