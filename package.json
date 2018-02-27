@@ -78,7 +78,7 @@
     "standard-version": "^4.2.0",
     "strip-ansi": "^4.0.0",
     "supertest": "^3.0.0",
-    "webpack": "^3.0.0"
+    "webpack": "^4.0.0"
   },
   "jest": {
     "modulePathIgnorePatterns": [
