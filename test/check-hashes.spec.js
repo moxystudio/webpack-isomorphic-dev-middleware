@@ -83,7 +83,7 @@ it('should fallback to `process.stderr.write` when printing the warnings', async
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerWithHashes);
 
-    jest.spyOn(process.stderr, 'write');
+    jest.spyOn(process.stderr, 'write').mockImplementation(() => {});
     app.use(webpackIsomorphicDevMiddleware(compiler, {
         report: false,
     }));

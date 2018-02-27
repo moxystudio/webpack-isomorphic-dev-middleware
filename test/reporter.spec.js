@@ -43,7 +43,7 @@ it('should not report anything if options.report is false', async () => {
     const app = express();
     const compiler = createCompiler(configClientBasic, configServerBasic);
 
-    jest.spyOn(process.stderr, 'write');
+    jest.spyOn(process.stderr, 'write').mockImplementation(() => {});
     app.use(webpackIsomorphicDevMiddleware(compiler, {
         report: false,
     }));
