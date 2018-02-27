@@ -90,7 +90,7 @@ it('should call next(err) if not a middleware error', () => {
     app.use(webpackIsomorphicDevMiddleware(compiler, {
         report: false,
     }));
-    app.use((err, req, res, next) => {  // eslint-disable-line handle-callback-err, no-unused-vars
+    app.use((err, req, res, next) => { // eslint-disable-line handle-callback-err, no-unused-vars
         expect(err).toBe(contrivedError);
         res.send(`Captured contrived error: ${err.message}`);
     });

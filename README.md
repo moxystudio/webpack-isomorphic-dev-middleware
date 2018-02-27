@@ -40,7 +40,6 @@ To make your development workflow easier to setup, `webpack-isomorphic-dev-middl
 - Optimizes compilation by using in-memory filesystem
 - Delays responses until the aggregated compiler finishes
 - Adds `isomorphic` to [res.locals](https://expressjs.com/en/api.html#res.locals), which includes the webpack stats and the methods exported in your server file
-- Warns about mistakes in your webpack configuration
 - Offers beautiful compilation [reporting](https://github.com/moxystudio/webpack-isomorphic-compiler-reporter) into your terminal
 - Receive status through OS [notifications](https://github.com/moxystudio/webpack-sane-compiler-notifier)
 - Shows compilation errors in the browser on refresh, similar to the ones you get on the terminal
