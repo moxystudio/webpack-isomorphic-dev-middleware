@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.2.0...v3.2.1) (2018-02-27)
+
+
+### Bug Fixes
+
+* check hashes on second recompilation (rebuild) ([#51](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/issues/51)) ([9c32b1a](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/9c32b1a))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.1.0...v3.2.0) (2018-02-03)
 
