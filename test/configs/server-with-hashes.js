@@ -7,7 +7,7 @@ module.exports = {
     target: 'node',
     output: {
         path: path.resolve(`${__dirname}/../tmp`),
-        filename: 'output.a1aaaaaaaaaaaaaaaaaaaaaaa.js',  // Simulate hashes,
+        filename: 'output.a1aaaaaaaaaaaaaaaaaaaaaaa.js', // Simulate hashes,
         libraryTarget: 'this',
     },
 };

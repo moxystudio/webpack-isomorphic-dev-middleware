@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should fallback to \`process.stderr.write\` when printing the warnings 1`] = `
+Array [
+  "[33mWARN[39m: Assets with an hash in its name were detected on the [1mserver[22m:
+- output.a1aaaaaaaaaaaaaaaaaaaaaaa.js
+
+This is known to cause [1mmemory leaks[22m with [1mwebpack-dev-middleware's[22m in-memory filesystem.
+You should avoid using [1m[hash][22m in output.filename, output.chunkFilename, output.hotUpdateMainFilename, output.hotUpdateChunkFilename as well as similar options in loaders & plugins.
+Alternatively, you may set \`memoryFs\` to false altough it will still create many files in the output folder.
+If you feel this was a false positive, please ignore this warning.
+
+",
+]
+`;
+
+exports[`should not warn about hashes are being used in webpack config if options.memoryFs is false 1`] = `
+"● Compiling...
+✔ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size Chunks Chunk Names
+    client.js  x.xx kB       0  [emitted]  main
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size Chunks Chunk Names
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+
+"
+`;
+
+exports[`should warn if hashes are being used in webpack config (rebuild) 1`] = `
+"● Compiling...
+✔ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size foo.js 10Kb
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size bar.js 10Kb
+
+● Compiling...
+✔ Compilation succeeded (10ms)
+WARN: Assets with an hash in its name were detected on the client:
+- foo.a1aaaaaaaaaaaaaaaaaaaaaaa.js
+
+This is known to cause memory leaks with webpack-dev-middleware's in-memory filesystem.
+You should avoid using [hash] in output.filename, output.chunkFilename, output.hotUpdateMainFilename, output.hotUpdateChunkFilename as well as similar options in loaders & plugins.
+Alternatively, you may set \`memoryFs\` to false altough it will still create many files in the output folder.
+If you feel this was a false positive, please ignore this warning.
+
+"
+`;
+
+exports[`should warn if hashes are being used in webpack config 1`] = `
+"● Compiling...
+✔ Compilation succeeded (10ms)
+
+     CLIENT                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size Chunks Chunk Names
+    client.js  x.xx kB       0  [emitted]  main
+
+     SERVER                             
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Asset Size Chunks Chunk Names
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+
+WARN: Assets with an hash in its name were detected on the server:
+- output.a1aaaaaaaaaaaaaaaaaaaaaaa.js
+
+This is known to cause memory leaks with webpack-dev-middleware's in-memory filesystem.
+You should avoid using [hash] in output.filename, output.chunkFilename, output.hotUpdateMainFilename, output.hotUpdateChunkFilename as well as similar options in loaders & plugins.
+Alternatively, you may set \`memoryFs\` to false altough it will still create many files in the output folder.
+If you feel this was a false positive, please ignore this warning.
+
+"
+`;

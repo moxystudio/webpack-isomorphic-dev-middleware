@@ -9,7 +9,7 @@ const memoryFs = require('./lib/util/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
 const renderErrorMiddleware = require('./lib/renderErrorMiddleware');
-const checkHumanErrors = require('./lib/util/checkHumanErrors');
+const checkHashes = require('./lib/util/checkHashes');
 
 function parseArgs(args) {
     const [firstArg = {}, secondArg, thirdArg] = args;
@@ -43,12 +43,12 @@ function parseArgs(args) {
 
 function parseOptions(options) {
     options = merge({
-        memoryFs: true,  // Enable memory fs
-        watchOptions: {},  // Options to pass to .watch()
+        memoryFs: true, // Enable memory fs
+        watchOptions: {}, // Options to pass to .watch()
         watchDelay: 0,
-        report: { stats: 'once' },  // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
-        notify: false,  // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
-        headers: null,  // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
+        report: { stats: 'once' }, // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
+        notify: false, // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
+        headers: null, // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
     }, options);
 
     // Normalize some options
@@ -72,13 +72,15 @@ function webpackIsomorphicDevMiddleware(...args) {
     // Enable reporting
     if (options.report !== false) {
         options.report = startReporting(compiler, options.report).options;
-        options.report.humanErrors && compiler.once('end', (compilation) => checkHumanErrors(compilation, options));
     }
 
     // Notify build status through OS notifications
     if (options.notify !== false) {
         options.notify = startNotifying(compiler, options.notify).options;
     }
+
+    // Check if hashes are present in emitted files
+    options.memoryFs && checkHashes(compiler, options);
 
     // Create middleware by composing our parts
     const middleware = compose([
