@@ -16,24 +16,24 @@ If you feel this was a false positive, please ignore this warning.
 
 exports[`should not warn about hashes are being used in webpack config if options.memoryFs is false 1`] = `
 "● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    client.js  x.xx kB       0  [emitted]  main
+    client.js  xxx
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  xxx
 
 "
 `;
 
 exports[`should warn if hashes are being used in webpack config (rebuild) 1`] = `
 "● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -44,7 +44,7 @@ exports[`should warn if hashes are being used in webpack config (rebuild) 1`] = 
     Asset Size bar.js 10Kb
 
 ● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 WARN: Assets with an hash in its name were detected on the client:
 - foo.a1aaaaaaaaaaaaaaaaaaaaaaa.js
 
@@ -54,23 +54,23 @@ Alternatively, you may set \`memoryFs\` to false altough it will still create ma
 If you feel this was a false positive, please ignore this warning.
 
 ● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 "
 `;
 
 exports[`should warn if hashes are being used in webpack config 1`] = `
 "● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    client.js  x.xx kB       0  [emitted]  main
+    client.js  xxx
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  x.xx kB       0  [emitted]  main
+    output.a1aaaaaaaaaaaaaaaaaaaaaaa.js  xxx
 
 WARN: Assets with an hash in its name were detected on the server:
 - output.a1aaaaaaaaaaaaaaaaaaaaaaa.js

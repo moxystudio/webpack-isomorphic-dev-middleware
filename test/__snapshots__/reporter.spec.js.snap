@@ -2,19 +2,19 @@
 
 exports[`should report stats only once by default 1`] = `
 "● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 
      CLIENT                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    client.js  x.xx kB       0  [emitted]  main
+    client.js  xxx
 
      SERVER                             
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Asset Size Chunks Chunk Names
-    server.js  x.xx kB       0  [emitted]  main
+    server.js  xxx
 
 ● Compiling...
-✔ Compilation succeeded (10ms)
+✔ Compilation succeeded (xxx)
 "
 `;

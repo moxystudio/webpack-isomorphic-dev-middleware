@@ -44,14 +44,15 @@ function parseArgs(args) {
 function parseOptions(options) {
     options = merge({
         memoryFs: true, // Enable memory fs
-        watchOptions: {}, // Options to pass to .watch()
         watchDelay: 0,
+        watchOptions: undefined, // Options to pass to .watch()
         report: { stats: 'once' }, // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
         notify: false, // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
-        headers: null, // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
+        headers: undefined, // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
     }, options);
 
     // Normalize some options
+    /* istanbul ignore next */
     options.report = options.report === true ? {} : options.report;
     options.notify = options.notify === true ? {} : options.notify;
 
