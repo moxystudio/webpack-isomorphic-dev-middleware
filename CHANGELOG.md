@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.2.2...v4.0.0) (2018-03-06)
+
+
+### Features
+
+* support webpack v4 ([#54](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/issues/54)) ([4b68325](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/4b68325))
+
+
+### BREAKING CHANGES
+
+* a peer dependency warning appears when using webpack v2 and v3, so it's safer to release this as a major
+
+
+
 <a name="3.2.2"></a>
 ## [3.2.2](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v3.2.1...v3.2.2) (2018-02-27)
 
