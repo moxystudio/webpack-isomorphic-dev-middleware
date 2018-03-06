@@ -25,7 +25,8 @@ The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
 
 `$ npm install webpack-isomorphic-dev-middleware --save-dev`
 
-The current version works with webpack v2 and v3.
+The current version works with webpack v2, v3 and v4.   
+You might get a peer dependency warning when using webpack v2 or v3 but you may ignore it.
 
 
 ## Motivation
@@ -81,11 +82,11 @@ Available options:
 | Name   | Description   | Type     | Default |
 | ------ | ------------- | -------- | ------- |
 | memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
-| watchOptions | Options to pass to webpack\'s watch | [object](https://webpack.js.org/configuration/watch/#watchoptions) | {} |
+| watchOptions | Options to pass to webpack\'s watch | [object](https://webpack.js.org/configuration/watch/#watchoptions) | |
 | watchDelay | Delay calling webpack\'s watch for the given milliseconds | number | 0 |
 | report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-reporter#available-options) | `{ stats: 'once' }`
 | notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-sane-compiler-notifier#available-options) | false |
-| headers | Headers to be sent when serving compiled files | object | null |
+| headers | Headers to be sent when serving compiled files | object | |
 
 
 The middleware function is flexible and supports various signatures:
