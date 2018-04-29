@@ -232,5 +232,24 @@ it('should set headers as specified in options.headers', () => {
     .get('/client.js')
     .expect(200)
     .expect('X-FOO', 'bar')
+    .expect('Cache-Control', 'max-age=0, must-revalidate')
+    .expect(/Hello!/);
+});
+
+it('should allow removing the default Cache-Control header via options.headers', () => {
+    const app = express();
+    const compiler = createCompiler(configClientBasic, configServerBasic);
+
+    app.use(webpackIsomorphicDevMiddleware(compiler, {
+        report: false,
+        headers: { 'Cache-Control': null },
+    }));
+
+    return request(app)
+    .get('/client.js')
+    .expect(200)
+    .expect((res) => {
+        expect(res.headers).not.toHaveProperty('cache-control');
+    })
     .expect(/Hello!/);
 });

@@ -5,6 +5,7 @@ const startReporting = require('webpack-isomorphic-compiler-reporter');
 const startNotifying = require('webpack-sane-compiler-notifier');
 const compose = require('compose-middleware').compose;
 const merge = require('lodash.merge');
+const omitBy = require('lodash.omitby');
 const memoryFs = require('./lib/util/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
@@ -48,13 +49,14 @@ function parseOptions(options) {
         watchOptions: undefined, // Options to pass to .watch()
         report: { stats: 'once' }, // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
         notify: false, // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
-        headers: undefined, // Headers to set when serving compiled files, see https://github.com/webpack/webpack-dev-middleware
+        headers: { 'Cache-Control': 'max-age=0, must-revalidate' }, // Headers to set when serving compiled files
     }, options);
 
     // Normalize some options
     /* istanbul ignore next */
     options.report = options.report === true ? {} : options.report;
     options.notify = options.notify === true ? {} : options.notify;
+    options.headers = omitBy(options.headers, (value) => value == null);
 
     return options;
 }
