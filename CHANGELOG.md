@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.3"></a>
+## [4.0.3](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v4.0.2...v4.0.3) (2018-04-29)
+
+
+### Bug Fixes
+
+* fix files being served from the cache while they have changed ([f311345](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/commit/f311345))
+
+
+
 <a name="4.0.2"></a>
 ## [4.0.2](https://github.com/moxystudio/webpack-isomorphic-dev-middleware/compare/v4.0.1...v4.0.2) (2018-04-29)
 
