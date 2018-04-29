@@ -187,6 +187,7 @@ it('should not re-require the server file if it has a runtime error', async () =
     expect(normalizeHtmlError(res.text)).toMatchSnapshot();
 
     expect(spy.mock.calls).toHaveLength(1);
+    expect(spy.mock.calls[0][0]).toMatch(/server\.js$/);
 });
 
 it('should not use in-memory filesystem if options.memoryFs is false', async () => {
