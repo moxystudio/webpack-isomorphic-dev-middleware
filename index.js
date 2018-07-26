@@ -6,6 +6,7 @@ const startNotifying = require('webpack-sane-compiler-notifier');
 const compose = require('compose-middleware').compose;
 const merge = require('lodash.merge');
 const omitBy = require('lodash.omitby');
+const castArray = require('lodash.castarray');
 const memoryFs = require('./lib/util/memoryFs');
 const mainMiddleware = require('./lib/mainMiddleware');
 const devMiddleware = require('./lib/devMiddleware');
@@ -50,6 +51,12 @@ function parseOptions(options) {
         report: { stats: 'once' }, // Enable reporting, see https://github.com/moxystudio/webpack-isomorphic-compiler-reporter
         notify: false, // Enable OS notifications, see https://github.com/moxystudio/webpack-sane-compiler-notifier
         headers: { 'Cache-Control': 'max-age=0, must-revalidate' }, // Headers to set when serving compiled files
+        findServerAssetName: (stats) => {
+            const entrypoint = Object.keys(stats.entrypoints)[0];
+
+            return castArray(stats.assetsByChunkName[entrypoint])
+            .find((asset) => /\.js$/.test(asset));
+        },
     }, options);
 
     // Normalize some options

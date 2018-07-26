@@ -14,7 +14,11 @@ function normalizeHtmlError(html) {
     // because some webpack versions include it, some not
     .replace(/\stest\/configs\/files\/[a-z0-9-]+\.js\s+/, ' ')
     // Normalize tmp directory
-    .replace(/\btest[/\\]tmp\/[^/\\]+\//g, 'test/tmp/');
+    .replace(/\btest[/\\]tmp\/[^/\\]+\//g, 'test/tmp/')
+    // In some environments, `&gt;` is displayed instead of `|`
+    .replace(/&gt; <\/span>/, '| </span>')
+    // In some Node versions, the line & column is displayed but not in others
+    .replace(/\s+\d+:\d+\b/, '');
 }
 
 module.exports = normalizeHtmlError;
