@@ -77,18 +77,6 @@ app.get('*', (req, res, next) => {
 });
 ```
 
-Available options:
-
-| Name   | Description   | Type     | Default |
-| ------ | ------------- | -------- | ------- |
-| memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
-| watchOptions | Options to pass to webpack\'s watch | [object](https://webpack.js.org/configuration/watch/#watchoptions) | |
-| watchDelay | Delay calling webpack\'s watch for the given milliseconds | number | 0 |
-| report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-reporter#available-options) | `{ stats: 'once' }`
-| notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-sane-compiler-notifier#available-options) | false |
-| headers | Headers to be sent when serving compiled files | object | `{ 'Cache-Control': 'max-age=0, must-revalidate' }` |
-
-
 The middleware function is flexible and supports various signatures:
 
 - Two separate webpack compilers
@@ -120,6 +108,30 @@ const isomorphicCompiler = webpackIsomorphicCompiler(
 );
 
 app.use(webpackIsomorphicDevMiddleware(isomorphicCompiler, { /* options */ }));
+```
+
+
+Available options:
+
+| Name   | Description   | Type     | Default |
+| ------ | ------------- | -------- | ------- |
+| memoryFs | Either disable or enable in-memory filesystem (disabling decreases performance) | boolean | true |
+| watchOptions | Options to pass to webpack\'s watch | [object](https://webpack.js.org/configuration/watch/#watchoptions) | |
+| watchDelay | Delay calling webpack\'s watch for the given milliseconds | number | 0 |
+| report | Enables reporting | boolean/[object](https://github.com/moxystudio/webpack-isomorphic-compiler-reporter#available-options) | `{ stats: 'once' }`
+| notify | Report build status through OS notifications | boolean/[object](https://github.com/moxystudio/webpack-sane-compiler-notifier#available-options) | false |
+| headers | Headers to be sent when serving compiled files | object | `{ 'Cache-Control': 'max-age=0, must-revalidate' }` |
+| findServerAssetName | Finds the server asset to require from the Webpack stats | function | *first js asset from the first entrypoint* |
+
+By default, `findServerAsset` selects the first JavaScript asset from first entrypoint. If that doesn't suit your Webpack configuration, you may change it:
+
+```js
+{
+    // Finds the asset with the `server` word in its name
+    findServerAssetName: (stats) => stats.assets
+        .map((asset) => asset.name)
+        .find((name) => /\bserver\b.+\.js$/.test(name));
+}
 ```
 
 
