@@ -71,7 +71,7 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.0",
     "eslint": "^4.0.0",
-    "eslint-config-moxy": "^5.2.0",
+    "eslint-config-moxy": "^6.0.0",
     "express": "^4.15.2",
     "husky": "^0.14.0",
     "jest": "^22.0.0",
