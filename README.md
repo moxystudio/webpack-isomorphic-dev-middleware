@@ -1,6 +1,6 @@
 # webpack-isomorphic-dev-middleware
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] 
 
 [npm-url]:https://npmjs.org/package/webpack-isomorphic-dev-middleware
 [npm-image]:http://img.shields.io/npm/v/webpack-isomorphic-dev-middleware.svg
@@ -13,8 +13,6 @@
 [david-dm-image]:https://img.shields.io/david/moxystudio/webpack-isomorphic-dev-middleware.svg
 [david-dm-dev-url]:https://david-dm.org/moxystudio/webpack-isomorphic-dev-middleware?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/webpack-isomorphic-dev-middleware.svg
-[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/webpack-isomorphic-dev-middleware.svg
-[greenkeeper-url]:https://greenkeeper.io
 
 The [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), but for isomorphic applications.
 
