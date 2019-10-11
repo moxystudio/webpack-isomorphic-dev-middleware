@@ -29,12 +29,8 @@
     "prerelease": "npm t && npm run lint",
     "release": "standard-version",
     "precommit": "lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
-  },
-  "standard-version": {
-    "scripts": {
-      "posttag": "git push --follow-tags origin master"
-    }
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "postrelease": "git push --follow-tags origin master && npm publish"
   },
   "lint-staged": {
     "*.js": [
