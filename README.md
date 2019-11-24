@@ -3,10 +3,10 @@
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
 [npm-url]:https://npmjs.org/package/webpack-isomorphic-dev-middleware
-[npm-image]:http://img.shields.io/npm/v/webpack-isomorphic-dev-middleware.svg
-[downloads-image]:http://img.shields.io/npm/dm/webpack-isomorphic-dev-middleware.svg
+[npm-image]:https://img.shields.io/npm/v/webpack-isomorphic-dev-middleware.svg
+[downloads-image]:https://img.shields.io/npm/dm/webpack-isomorphic-dev-middleware.svg
 [travis-url]:https://travis-ci.org/moxystudio/webpack-isomorphic-dev-middleware
-[travis-image]:http://img.shields.io/travis/moxystudio/webpack-isomorphic-dev-middleware/master.svg
+[travis-image]:https://img.shields.io/travis/moxystudio/webpack-isomorphic-dev-middleware/master.svg
 [codecov-url]:https://codecov.io/gh/moxystudio/webpack-isomorphic-dev-middleware
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/webpack-isomorphic-dev-middleware/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/webpack-isomorphic-dev-middleware
