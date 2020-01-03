@@ -30,7 +30,7 @@
     "release": "standard-version",
     "precommit": "lint-staged",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "postrelease": "git push --follow-tags origin master && npm publish"
+    "postrelease": "git push --follow-tags origin HEAD && npm publish"
   },
   "lint-staged": {
     "*.js": [
